@@ -1,0 +1,17 @@
+package com.meia.ecommerce.controllers;
+
+//import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+//import com.meia.ecommerce.services.RatingService;
+
+@RestController
+@RequestMapping("/rating")
+public class RatingController {
+
+    //@Autowired
+    //private RatingService ratingService;
+
+    
+}

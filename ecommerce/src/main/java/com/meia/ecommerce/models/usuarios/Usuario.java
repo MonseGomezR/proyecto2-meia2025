@@ -3,6 +3,7 @@ package com.meia.ecommerce.models.usuarios;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.meia.ecommerce.models.productos.DetalleRating;
 import com.meia.ecommerce.models.productos.Producto;
 
@@ -14,15 +15,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 
 @Entity
@@ -41,11 +41,18 @@ public class Usuario {
     private TipoUsuario tipoUsuario;
 
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Tarjeta> tarjetas;
 
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Producto> productos;
 
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<DetalleRating> detalleRatings;
+
+    @OneToOne
+    @JoinColumn(name = "id_persona", nullable = false)
+    private Persona persona;
 }

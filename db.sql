@@ -1,8 +1,3 @@
---
--- PostgreSQL database dump
---
-
-\restrict xMBBA3Nf5zNm05W5hULB4hPlun9iqPkLaJztY9vlPiUlUvHjG5bLQ0B4pDZKd0G
 
 -- Dumped from database version 17.6
 -- Dumped by pg_dump version 17.6
@@ -834,8 +829,6 @@ ALTER TABLE ONLY ventas.pago ALTER COLUMN id SET DEFAULT nextval('ventas.pago_id
 -- Data for Name: entrega; Type: TABLE DATA; Schema: general; Owner: postgres
 --
 
-COPY general.entrega (id, comentario, fecha_entrega, id_pedido, id_encargado) FROM stdin;
-\.
 
 
 --
@@ -844,8 +837,6 @@ COPY general.entrega (id, comentario, fecha_entrega, id_pedido, id_encargado) FR
 -- Data for Name: notificacion; Type: TABLE DATA; Schema: general; Owner: postgres
 --
 
-COPY general.notificacion (id, tipo, contenido, fecha, id_usuario) FROM stdin;
-\.
 
 
 --
@@ -854,8 +845,6 @@ COPY general.notificacion (id, tipo, contenido, fecha, id_usuario) FROM stdin;
 -- Data for Name: revision_producto; Type: TABLE DATA; Schema: general; Owner: postgres
 --
 
-COPY general.revision_producto (id, razon, estado, fecha_solicitud, fecha_revision, id_producto, id_moderador) FROM stdin;
-\.
 
 
 --
@@ -864,8 +853,6 @@ COPY general.revision_producto (id, razon, estado, fecha_solicitud, fecha_revisi
 -- Data for Name: sancion; Type: TABLE DATA; Schema: general; Owner: postgres
 --
 
-COPY general.sancion (id, estado, razon, fecha_inicio, fecha_fin, id_moderador, id_usuario) FROM stdin;
-\.
 
 
 --
@@ -874,24 +861,19 @@ COPY general.sancion (id, estado, razon, fecha_inicio, fecha_fin, id_moderador, 
 -- Data for Name: categoria_producto; Type: TABLE DATA; Schema: productos; Owner: postgres
 --
 
-COPY productos.categoria_producto (id, nombre) FROM stdin;
-1	Tecnologia
-2	Hogar
-3	Academico
-4	Personal
-5	Decoracion
-6	Otro
-\.
-
+INSERT INTO productos.categoria_producto (id, nombre) VALUES
+(1, 'Tecnologia'),
+(2, 'Hogar'),
+(3, 'Academico'),
+(4, 'Personal'),
+(5, 'Decoracion'),
+(6, 'Otro');
 
 --
 -- TOC entry 5110 (class 0 OID 24743)
 -- Dependencies: 233
 -- Data for Name: detalle_rating; Type: TABLE DATA; Schema: productos; Owner: postgres
 --
-
-COPY productos.detalle_rating (id, id_rating, id_usuario, valor, comentario) FROM stdin;
-\.
 
 
 --
@@ -900,109 +882,107 @@ COPY productos.detalle_rating (id, id_rating, id_usuario, valor, comentario) FRO
 -- Data for Name: producto; Type: TABLE DATA; Schema: productos; Owner: postgres
 --
 
-COPY productos.producto (id, nombre, descripcion, precio, stock, estado, id_categoria, id_usuario, publicado) FROM stdin;
-cc3cd8a1-55a2-403c-a54e-0bcff9c1429c	SSD Crucial MX500 1TB	Unidad de estado sólido SATA 2.5".	850.00	3	Usado	1	c4f8b857-1111-4d1e-9000-000000000010	f
-2bde0d15-432f-486b-8eba-96fe367adbb6	Cepillo eléctrico Oral-B Pro 1000	Cabezal redondo rotatorio.	300.00	4	Nuevo	4	c4f8b857-1111-4d1e-9000-000000000010	f
-56fecdd6-b7c7-41c1-ac95-062c35032f8e	Billetera Guess original	Cuero genuino marrón.	320.00	2	Usado	4	c4f8b857-1111-4d1e-9000-000000000010	f
-6485d606-9201-47fc-b8ab-d2f151654dd9	Crema hidratante Nivea Men 200ml	Protección diaria.	60.00	8	Usado	4	c4f8b857-1111-4d1e-9000-000000000010	f
-f1b92a64-5b66-44ae-a9ff-ccdbd0e6f916	Guantes de ciclismo Rockbros	Antideslizantes.	180.00	4	Usado	6	c4f8b857-1111-4d1e-9000-000000000010	f
-11dfb297-24c3-4b2d-b2cf-09f9620c137e	Planta artificial decorativa	Maceta cerámica blanca.	180.00	11	Usado	5	c4f8b857-1111-4d1e-9000-000000000010	f
-0c9dad69-3445-4051-a72b-234f55c45507	Laptop Lenovo IdeaPad 3	Ryzen 5, 8GB RAM, 512GB SSD.	5200.00	14	Nuevo	1	c4f8b857-1111-4d1e-9000-000000000010	f
-18a9b1af-c319-4500-88cd-5d872726475f	Aspiradora Electrolux Pure D9	Filtro HEPA, bolsa de 5L.	1900.00	15	Nuevo	2	c4f8b857-1111-4d1e-9000-000000000010	f
-07ce1cfd-5440-4f7b-b3d9-30d686c41559	Ventilador Dyson Cool AM07	Sin aspas, silencioso.	2200.00	3	Usado	2	c4f8b857-1111-4d1e-9000-000000000010	f
-f52b3a93-34fc-4adf-9369-2e87994d7643	Microondas Panasonic NN-SN67HS	1.2 pies cúbicos, sensor inverter.	950.00	14	Nuevo	2	c4f8b857-1111-4d1e-9000-000000000010	f
-15df52e3-80ec-489d-a559-f5c52210045e	Router ASUS RT-AX55	WiFi 6 Dual Band, 1800 Mbps.	950.00	11	Nuevo	1	c4f8b857-1111-4d1e-9000-000000000011	f
-59e53280-b62e-41e7-b8ac-8ab930d6149d	Shampoo Pantene Pro-V 400ml	Fortalece el cabello.	55.00	4	Usado	4	c4f8b857-1111-4d1e-9000-000000000011	f
-1d69ff0b-cf72-40c1-ad8d-9aedfc8e5611	Tapete para yoga Manduka	Antideslizante profesional.	420.00	2	Usado	6	c4f8b857-1111-4d1e-9000-000000000011	f
-0b55c50a-c841-4de1-a232-952e681723de	Calculadora Texas Instruments TI-84 Plus	Gráfica, con pantalla a color.	900.00	7	Nuevo	3	c4f8b857-1111-4d1e-9000-000000000011	f
-9dd3ab55-44ac-4b2d-99ca-af5fa3457c1f	Lentes de sol Ray-Ban Wayfarer	Protección UV400.	950.00	3	Nuevo	4	c4f8b857-1111-4d1e-9000-000000000011	f
-bebd4d29-4acf-4cb7-b19f-bfb51abef401	Jarrón de cristal soplado	Diseño elegante transparente.	220.00	2	Nuevo	5	c4f8b857-1111-4d1e-9000-000000000011	f
-076b2900-45dc-4908-8e17-b180edc7bef4	Audífonos Logitech G Pro X	Sonido envolvente 7.1 con micrófono desmontable.	950.00	10	Usado	1	c4f8b857-1111-4d1e-9000-000000000011	f
-6a84cae6-d13b-4257-813d-d18eb2528f17	Taza térmica Contigo 500ml	Acero inoxidable, hermética.	250.00	3	Usado	4	c4f8b857-1111-4d1e-9000-000000000011	f
-9555bd71-179a-4db1-b082-c45e1077a592	Paraguas compacto Columbia	Resistente al viento.	180.00	10	Usado	6	c4f8b857-1111-4d1e-9000-000000000011	f
-914bb3b0-09c7-4aca-89f9-d96503de0f83	Teclado mecánico Corsair K68	Teclado mecánico con retroiluminación RGB.	600.00	14	Nuevo	1	c4f8b857-1111-4d1e-9000-000000000011	f
-d04b408e-07a4-442e-ab98-1b3e0d46faa8	Libro Álgebra Lineal	Texto universitario clásico.	250.00	10	Nuevo	3	c4f8b857-1111-4d1e-9000-000000000012	f
-d161cf6e-ddb4-4237-8b61-1e6ffe44730d	Gorra Nike Sportswear	Algodón, ajustable.	180.00	8	Nuevo	4	c4f8b857-1111-4d1e-9000-000000000012	f
-e9763e30-7be5-4c3f-8ea6-74842d2f2297	Maletín Samsonite 20"	Ruedas giratorias, ABS rígido.	950.00	7	Usado	6	c4f8b857-1111-4d1e-9000-000000000012	f
-083c1ec7-ebea-4dd7-a4f8-3e0fb1f177c2	Freidora de aire Philips XL	Capacidad de 5.5L, pantalla digital.	1100.00	6	Usado	2	c4f8b857-1111-4d1e-9000-000000000012	f
-bbde748f-3315-429f-baf5-86432cbbae04	Set de herramientas Bosch 46 piezas	Brocas, llaves, y maletín.	550.00	4	Usado	6	c4f8b857-1111-4d1e-9000-000000000012	f
-0ea7e229-1b5d-40ce-a544-c1fc16d22efd	Mochila Herschel Pop Quiz	Compartimiento acolchado para laptop.	420.00	14	Nuevo	3	c4f8b857-1111-4d1e-9000-000000000012	f
-e8fb29d0-8ccd-4f12-bf87-d520eea5567e	Termo Stanley Classic 1L	Mantiene temperatura 24h.	300.00	5	Nuevo	6	c4f8b857-1111-4d1e-9000-000000000012	f
-2fe241d5-fdcb-4c58-8679-532176ab3d9b	Alfombra persa 2x3m	Diseño clásico oriental.	950.00	15	Usado	5	c4f8b857-1111-4d1e-9000-000000000012	f
-28a10d5b-89ce-4292-b089-a5514b0a7c5a	Bolígrafo Parker Jotter	Acero inoxidable, recargable.	150.00	9	Nuevo	3	c4f8b857-1111-4d1e-9000-000000000012	f
-9e0414a7-54a2-47bf-811c-93263d879d37	Vela aromática Yankee Candle	Aroma a vainilla.	120.00	7	Nuevo	5	c4f8b857-1111-4d1e-9000-000000000012	f
-ba95fe6e-ddb7-4f0e-b2cd-3b623933b80a	Mouse inalámbrico Razer Pro Click	Mouse ergonómico inalámbrico con sensor óptico.	450.00	7	Usado	1	c4f8b857-1111-4d1e-9000-000000000013	f
-c91aa0ff-58c5-446d-a045-bc8dcab4c65b	Horno tostador Hamilton Beach	Capacidad de 6 rebanadas, temporizador.	600.00	15	Nuevo	2	c4f8b857-1111-4d1e-9000-000000000013	f
-fdb294d1-3a61-4609-a38c-02dffcb89ff0	Smartwatch Huawei GT3	Reloj inteligente con GPS integrado.	1800.00	15	Usado	1	c4f8b857-1111-4d1e-9000-000000000013	f
-4b0371d6-163c-4574-8175-62b9f96cf9b1	Perfume Chanel Bleu 100ml	Fragancia elegante amaderada.	1200.00	5	Usado	4	c4f8b857-1111-4d1e-9000-000000000013	f
-1f4d2e87-8166-4dee-ab3b-13338be92024	Libro Estructuras de Datos en Java	4ta edición, Pearson.	350.00	10	Nuevo	3	c4f8b857-1111-4d1e-9000-000000000013	f
-3af5c7db-1c27-46ff-99d4-2e60e13af212	Tablet Samsung Galaxy Tab S6 Lite	Pantalla de 10.4", S Pen incluido.	2900.00	11	Nuevo	1	c4f8b857-1111-4d1e-9000-000000000013	f
-2165b770-07d5-4693-a4b6-e37271e38014	Calculadora Casio FX-991EX	Pantalla natural, 552 funciones.	300.00	6	Nuevo	3	c4f8b857-1111-4d1e-9000-000000000013	f
-d52c852e-828d-4c16-bd42-6acbc267c6d2	Libro Matemáticas Discretas	3ra edición, McGraw-Hill.	280.00	3	Usado	3	c4f8b857-1111-4d1e-9000-000000000013	f
-0a64d7ac-759e-420e-a0de-b29bf115dacc	Bicicleta estática Reebok Jet 100	12 programas, pantalla LCD.	2500.00	15	Nuevo	6	c4f8b857-1111-4d1e-9000-000000000013	f
-4589bf1c-052d-440d-9954-0782cf795b54	Plancha Oster SteamGlide	Base cerámica, vapor ajustable.	350.00	9	Usado	2	c4f8b857-1111-4d1e-9000-000000000013	f
-2c8d9a11-ce7b-4cf1-896e-35b6b0fc1225	Cuadro abstracto moderno	Lienzo 80x60cm, tonos azules.	350.00	2	Nuevo	5	c4f8b857-1111-4d1e-9000-000000000014	f
-6c77c958-adfd-4ce2-a247-e14728365203	Monitor Samsung Odyssey 27"	Pantalla curva QHD 144Hz.	2800.00	9	Nuevo	1	c4f8b857-1111-4d1e-9000-000000000014	f
-3753731f-f6c7-4589-ba35-bfcb91a73713	Lámpara de pie minimalista	Estructura metálica, luz cálida.	400.00	12	Nuevo	5	c4f8b857-1111-4d1e-9000-000000000014	f
-77b51280-3c61-477b-b420-67266d8c583c	Juego de sartenes Tefal Ingenio	Set de 3 piezas antiadherentes.	650.00	6	Nuevo	2	c4f8b857-1111-4d1e-9000-000000000014	f
-07673826-6c14-4095-8bb8-0e34c5356d9d	Reloj Casio G-Shock GA2100	Resistente al agua, diseño robusto.	850.00	7	Usado	4	c4f8b857-1111-4d1e-9000-000000000014	f
-fdfe10a6-ce76-4102-bf1b-c8ee1174da21	Botella Hydro Flask 1L	Aislamiento al vacío, acero inoxidable.	300.00	11	Nuevo	6	c4f8b857-1111-4d1e-9000-000000000014	f
-4c66d39a-a665-4fe7-b367-29d7bbc65f37	Cuaderno Moleskine Classic	Tapa dura, 200 páginas.	180.00	15	Nuevo	3	c4f8b857-1111-4d1e-9000-000000000014	f
-6ae7d8ea-1545-4486-92da-5c6b6dd225a7	Set de resaltadores Faber-Castell	6 colores pastel.	80.00	15	Nuevo	3	c4f8b857-1111-4d1e-9000-000000000014	f
-ad50e23f-a304-4c57-85a8-1fb3aff88f69	Cuerda para saltar Adidas	Rodamientos de acero.	120.00	13	Usado	6	c4f8b857-1111-4d1e-9000-000000000014	f
-28e00aef-a072-46b8-b748-8a09f29f7327	Cámara web AVerMedia PW315	Full HD con autoenfoque.	700.00	11	Nuevo	1	c4f8b857-1111-4d1e-9000-000000000014	f
-d5a1d473-39e0-4845-98ce-13716d7eba42	Powerbank Anker 20000mAh	Carga rápida USB-C.	350.00	15	Nuevo	6	c4f8b857-1111-4d1e-9000-000000000015	f
-23498df2-692d-4f0e-8bd3-602c54b2d7fd	Reloj de pared vintage	Estilo retro, color bronce.	280.00	4	Usado	5	c4f8b857-1111-4d1e-9000-000000000015	f
-d04703a2-e54e-44be-bc3b-d68a28a4764e	Agenda 2025 Oxford	Planificador semanal con tapa flexible.	120.00	7	Usado	3	c4f8b857-1111-4d1e-9000-000000000015	f
-7280fdad-8bfc-4cfb-8ad6-6d9d3b5ee3bb	Cortinas blackout grises	2 paneles, 2x2m.	500.00	6	Nuevo	5	c4f8b857-1111-4d1e-9000-000000000015	f
-fad863fc-9489-4b22-88da-e22b6effc9c7	Espejo decorativo redondo	Marco dorado, 60cm diámetro.	450.00	12	Usado	5	c4f8b857-1111-4d1e-9000-000000000015	f
-d1a2d807-3ce1-4062-9b22-99dc1718f2ee	Set de cuchillos Cuisinart 12 piezas	Acero inoxidable con bloque de madera.	500.00	8	Nuevo	2	c4f8b857-1111-4d1e-9000-000000000015	f
-72b53a46-3feb-488e-b3c5-131970f32c12	Perfume Carolina Herrera 212 VIP	Aroma floral oriental.	700.00	11	Usado	4	c4f8b857-1111-4d1e-9000-000000000015	f
-e706891a-aa6b-4a41-b490-54de9f760b4d	Cafetera Nespresso Essenza Mini	Compatible con cápsulas Nespresso.	750.00	11	Usado	2	c4f8b857-1111-4d1e-9000-000000000015	f
-5ed78473-12ab-4def-b864-204a2a9555b1	Cojín decorativo beige	Tela suave, funda removible.	90.00	4	Nuevo	5	c4f8b857-1111-4d1e-9000-000000000015	f
-8182bc67-3e46-455c-9268-b1df13c85baf	Licuadora Oster Reversa 600W	Cuchillas de acero inoxidable, vaso de vidrio.	450.00	13	Usado	2	c4f8b857-1111-4d1e-9000-000000000015	f
-38fd6b6f-ebc0-499a-88ae-7d52e969ca5b	SSD Crucial MX500 1TB	Unidad de estado sólido SATA 2.5".	850.00	8	Usado	1	c4f8b857-1111-4d1e-9000-000000000016	f
-50cb0193-c1f1-46d0-8cf0-847b5f6f3254	Cepillo eléctrico Oral-B Pro 1000	Cabezal redondo rotatorio.	300.00	8	Usado	4	c4f8b857-1111-4d1e-9000-000000000016	f
-9b6cfd6e-3224-4b28-a66f-c26ff222c76c	Billetera Guess original	Cuero genuino marrón.	320.00	7	Usado	4	c4f8b857-1111-4d1e-9000-000000000016	f
-4c8c6043-7ae2-44c5-abe3-d0d4d1def431	Crema hidratante Nivea Men 200ml	Protección diaria.	60.00	2	Usado	4	c4f8b857-1111-4d1e-9000-000000000016	f
-5309e3b9-98ec-4d48-b321-863ffc88db12	Guantes de ciclismo Rockbros	Antideslizantes.	180.00	13	Usado	6	c4f8b857-1111-4d1e-9000-000000000016	f
-58c69c94-3591-45b3-b0f1-379dbfd86241	Planta artificial decorativa	Maceta cerámica blanca.	180.00	10	Nuevo	5	c4f8b857-1111-4d1e-9000-000000000016	f
-108fdd1f-7f63-40c5-8ca9-2448388284a1	Laptop Lenovo IdeaPad 3	Ryzen 5, 8GB RAM, 512GB SSD.	5200.00	14	Usado	1	c4f8b857-1111-4d1e-9000-000000000016	f
-798d2e47-bb78-4fd3-9d0e-6dd83514c0cc	Aspiradora Electrolux Pure D9	Filtro HEPA, bolsa de 5L.	1900.00	10	Nuevo	2	c4f8b857-1111-4d1e-9000-000000000016	f
-4ad304eb-0878-4527-9876-eb048fd03876	Ventilador Dyson Cool AM07	Sin aspas, silencioso.	2200.00	3	Nuevo	2	c4f8b857-1111-4d1e-9000-000000000016	f
-dc9ae67e-77cb-43a3-9338-6d026b63a703	Microondas Panasonic NN-SN67HS	1.2 pies cúbicos, sensor inverter.	950.00	7	Nuevo	2	c4f8b857-1111-4d1e-9000-000000000016	f
-897d573b-7fc3-4afc-a15a-dbb0e254a67e	Router ASUS RT-AX55	WiFi 6 Dual Band, 1800 Mbps.	950.00	4	Nuevo	1	c4f8b857-1111-4d1e-9000-000000000017	f
-68bf1dd6-2e0c-4d6d-a7d3-e8dacabb5636	Shampoo Pantene Pro-V 400ml	Fortalece el cabello.	55.00	15	Nuevo	4	c4f8b857-1111-4d1e-9000-000000000017	f
-98c6d2a7-320c-4149-b144-0bd45e064163	Tapete para yoga Manduka	Antideslizante profesional.	420.00	2	Usado	6	c4f8b857-1111-4d1e-9000-000000000017	f
-b5796591-d659-4403-bfcd-fc9f5eea7b6e	Calculadora Texas Instruments TI-84 Plus	Gráfica, con pantalla a color.	900.00	11	Nuevo	3	c4f8b857-1111-4d1e-9000-000000000017	f
-f50b827c-b4db-4852-9494-c4eab1dee864	Lentes de sol Ray-Ban Wayfarer	Protección UV400.	950.00	2	Usado	4	c4f8b857-1111-4d1e-9000-000000000017	f
-c8652a80-afae-47df-8182-0cbc77c8cdae	Jarrón de cristal soplado	Diseño elegante transparente.	220.00	3	Nuevo	5	c4f8b857-1111-4d1e-9000-000000000017	f
-0526d89d-192a-41e0-a218-44e935d36b9a	Audífonos Logitech G Pro X	Sonido envolvente 7.1 con micrófono desmontable.	950.00	2	Usado	1	c4f8b857-1111-4d1e-9000-000000000017	f
-fc62c3d7-1e00-4341-b0c2-654765466c88	Taza térmica Contigo 500ml	Acero inoxidable, hermética.	250.00	6	Usado	4	c4f8b857-1111-4d1e-9000-000000000017	f
-10438913-eede-440b-92d7-b1f82e8f2be4	Paraguas compacto Columbia	Resistente al viento.	180.00	9	Usado	6	c4f8b857-1111-4d1e-9000-000000000017	f
-bad32fd5-c71b-4fad-b47c-1613f08f6b56	Teclado mecánico Corsair K68	Teclado mecánico con retroiluminación RGB.	600.00	7	Usado	1	c4f8b857-1111-4d1e-9000-000000000017	f
-031308a1-2ad7-414e-820e-c26aaad6db7c	Libro Álgebra Lineal	Texto universitario clásico.	250.00	12	Usado	3	c4f8b857-1111-4d1e-9000-000000000018	f
-51b4827c-a604-4606-a180-d8a1e2627849	Gorra Nike Sportswear	Algodón, ajustable.	180.00	11	Usado	4	c4f8b857-1111-4d1e-9000-000000000018	f
-024e8af0-10e2-4eb1-9be7-6f8cd44e66b1	Maletín Samsonite 20"	Ruedas giratorias, ABS rígido.	950.00	14	Nuevo	6	c4f8b857-1111-4d1e-9000-000000000018	f
-7fc4953c-093c-4395-9385-a1bdade3ea75	Freidora de aire Philips XL	Capacidad de 5.5L, pantalla digital.	1100.00	12	Usado	2	c4f8b857-1111-4d1e-9000-000000000018	f
-04d7a401-0311-47f4-86cc-3d8029bf09b9	Set de herramientas Bosch 46 piezas	Brocas, llaves, y maletín.	550.00	15	Usado	6	c4f8b857-1111-4d1e-9000-000000000018	f
-2af7b225-90d8-4e20-a167-4569d6f42ab2	Mochila Herschel Pop Quiz	Compartimiento acolchado para laptop.	420.00	11	Nuevo	3	c4f8b857-1111-4d1e-9000-000000000018	f
-d64dc1cb-294a-4d3d-a92d-5dee6843f856	Termo Stanley Classic 1L	Mantiene temperatura 24h.	300.00	11	Nuevo	6	c4f8b857-1111-4d1e-9000-000000000018	f
-ca8184a9-061a-4333-bc11-9613056d2518	Alfombra persa 2x3m	Diseño clásico oriental.	950.00	12	Usado	5	c4f8b857-1111-4d1e-9000-000000000018	f
-f2da7762-76f9-4c6a-8316-3af70e43ccbb	Bolígrafo Parker Jotter	Acero inoxidable, recargable.	150.00	6	Usado	3	c4f8b857-1111-4d1e-9000-000000000018	f
-e361c2f6-f5dd-41d6-b894-d995ebe10fa0	Vela aromática Yankee Candle	Aroma a vainilla.	120.00	15	Nuevo	5	c4f8b857-1111-4d1e-9000-000000000018	f
-1709ae1b-08c2-482f-bbd0-9c5154448fa7	Mouse inalámbrico Razer Pro Click	Mouse ergonómico inalámbrico con sensor óptico.	450.00	3	Usado	1	c4f8b857-1111-4d1e-9000-000000000019	f
-73bfb0b4-ad82-464d-9c66-bb9f0bbd78aa	Horno tostador Hamilton Beach	Capacidad de 6 rebanadas, temporizador.	600.00	4	Usado	2	c4f8b857-1111-4d1e-9000-000000000019	f
-8e022fa7-2c07-4eae-a0e9-34f19b7b89d9	Smartwatch Huawei GT3	Reloj inteligente con GPS integrado.	1800.00	12	Usado	1	c4f8b857-1111-4d1e-9000-000000000019	f
-1b521855-59bb-451f-9c40-b49f48f76fce	Perfume Chanel Bleu 100ml	Fragancia elegante amaderada.	1200.00	8	Nuevo	4	c4f8b857-1111-4d1e-9000-000000000019	f
-d61bbd23-8095-449a-80b1-2b3db5e231e2	Libro Estructuras de Datos en Java	4ta edición, Pearson.	350.00	11	Nuevo	3	c4f8b857-1111-4d1e-9000-000000000019	f
-5a116e1f-1de1-46af-a068-d8ff18feb8ff	Tablet Samsung Galaxy Tab S6 Lite	Pantalla de 10.4", S Pen incluido.	2900.00	4	Usado	1	c4f8b857-1111-4d1e-9000-000000000019	f
-25e6fb05-40cf-45cf-9d79-f8813733c308	Calculadora Casio FX-991EX	Pantalla natural, 552 funciones.	300.00	10	Usado	3	c4f8b857-1111-4d1e-9000-000000000019	f
-4d5bcafc-e8d9-4855-941d-26e0a2d084fc	Libro Matemáticas Discretas	3ra edición, McGraw-Hill.	280.00	10	Nuevo	3	c4f8b857-1111-4d1e-9000-000000000019	f
-8efc946a-f1ee-4fa9-9f19-31ce0a29cf34	Bicicleta estática Reebok Jet 100	12 programas, pantalla LCD.	2500.00	8	Nuevo	6	c4f8b857-1111-4d1e-9000-000000000019	f
-7a54d5c5-424b-4b4c-b79a-ce414df6fd1a	Plancha Oster SteamGlide	Base cerámica, vapor ajustable.	350.00	12	Nuevo	2	c4f8b857-1111-4d1e-9000-000000000019	f
-\.
-
+INSERT INTO productos.producto (id, nombre, descripcion, precio, stock, estado, id_categoria, id_usuario, publicado) VALUES
+('cc3cd8a1-55a2-403c-a54e-0bcff9c1429c', 'SSD Crucial MX500 1TB', 'Unidad de estado sólido SATA 2.5.', 850.00, 3, 'Usado', 1, 'c4f8b857-1111-4d1e-9000-000000000010', false),
+('2bde0d15-432f-486b-8eba-96fe367adbb6', 'Cepillo eléctrico Oral-B Pro 1000', 'Cabezal redondo rotatorio.', 300.00, 4, 'Nuevo', 4, 'c4f8b857-1111-4d1e-9000-000000000010', false),
+('56fecdd6-b7c7-41c1-ac95-062c35032f8e', 'Billetera Guess original', 'Cuero genuino marrón.', 320.00, 2, 'Usado', 4, 'c4f8b857-1111-4d1e-9000-000000000010', false),
+('6485d606-9201-47fc-b8ab-d2f151654dd9', 'Crema hidratante Nivea Men 200ml', 'Protección diaria.', 60.00, 8, 'Usado', 4, 'c4f8b857-1111-4d1e-9000-000000000010', false),
+('f1b92a64-5b66-44ae-a9ff-ccdbd0e6f916', 'Guantes de ciclismo Rockbros', 'Antideslizantes.', 180.00, 4, 'Usado', 6, 'c4f8b857-1111-4d1e-9000-000000000010', false),
+('11dfb297-24c3-4b2d-b2cf-09f9620c137e', 'Planta artificial decorativa', 'Maceta cerámica blanca.', 180.00, 11, 'Usado', 5, 'c4f8b857-1111-4d1e-9000-000000000010', false),
+('0c9dad69-3445-4051-a72b-234f55c45507', 'Laptop Lenovo IdeaPad 3', 'Ryzen 5, 8GB RAM, 512GB SSD.', 5200.00, 14, 'Nuevo', 1, 'c4f8b857-1111-4d1e-9000-000000000010', false),
+('18a9b1af-c319-4500-88cd-5d872726475f', 'Aspiradora Electrolux Pure D9', 'Filtro HEPA, bolsa de 5L.', 1900.00, 15, 'Nuevo', 2, 'c4f8b857-1111-4d1e-9000-000000000010', false),
+('07ce1cfd-5440-4f7b-b3d9-30d686c41559', 'Ventilador Dyson Cool AM07', 'Sin aspas, silencioso.', 2200.00, 3, 'Usado', 2, 'c4f8b857-1111-4d1e-9000-000000000010', false),
+('f52b3a93-34fc-4adf-9369-2e87994d7643', 'Microondas Panasonic NN-SN67HS', '1.2 pies cúbicos, sensor inverter.', 950.00, 14, 'Nuevo', 2, 'c4f8b857-1111-4d1e-9000-000000000010', false),
+('15df52e3-80ec-489d-a559-f5c52210045e', 'Router ASUS RT-AX55', 'WiFi 6 Dual Band, 1800 Mbps.', 950.00, 11, 'Nuevo', 1, 'c4f8b857-1111-4d1e-9000-000000000011', false),
+('59e53280-b62e-41e7-b8ac-8ab930d6149d', 'Shampoo Pantene Pro-V 400ml', 'Fortalece el cabello.', 55.00, 4, 'Usado', 4, 'c4f8b857-1111-4d1e-9000-000000000011', false),
+('1d69ff0b-cf72-40c1-ad8d-9aedfc8e5611', 'Tapete para yoga Manduka', 'Antideslizante profesional.', 420.00, 2, 'Usado', 6, 'c4f8b857-1111-4d1e-9000-000000000011', false),
+('0b55c50a-c841-4de1-a232-952e681723de', 'Calculadora Texas Instruments TI-84 Plus', 'Gráfica, con pantalla a color.', 900.00, 7, 'Nuevo', 3, 'c4f8b857-1111-4d1e-9000-000000000011', false),
+('9dd3ab55-44ac-4b2d-99ca-af5fa3457c1f', 'Lentes de sol Ray-Ban Wayfarer', 'Protección UV400.', 950.00, 3, 'Nuevo', 4, 'c4f8b857-1111-4d1e-9000-000000000011', false),
+('bebd4d29-4acf-4cb7-b19f-bfb51abef401', 'Jarrón de cristal soplado', 'Diseño elegante transparente.', 220.00, 2, 'Nuevo', 5, 'c4f8b857-1111-4d1e-9000-000000000011', false),
+('076b2900-45dc-4908-8e17-b180edc7bef4', 'Audífonos Logitech G Pro X', 'Sonido envolvente 7.1 con micrófono desmontable.', 950.00, 10, 'Usado', 1, 'c4f8b857-1111-4d1e-9000-000000000011', false),
+('6a84cae6-d13b-4257-813d-d18eb2528f17', 'Taza térmica Contigo 500ml', 'Acero inoxidable, hermética.', 250.00, 3, 'Usado', 4, 'c4f8b857-1111-4d1e-9000-000000000011', false),
+('9555bd71-179a-4db1-b082-c45e1077a592', 'Paraguas compacto Columbia', 'Resistente al viento.', 180.00, 10, 'Usado', 6, 'c4f8b857-1111-4d1e-9000-000000000011', false),
+('914bb3b0-09c7-4aca-89f9-d96503de0f83', 'Teclado mecánico Corsair K68', 'Teclado mecánico con retroiluminación RGB.', 600.00, 14, 'Nuevo', 1, 'c4f8b857-1111-4d1e-9000-000000000011', false),
+('d04b408e-07a4-442e-ab98-1b3e0d46faa8', 'Libro Álgebra Lineal', 'Texto universitario clásico.', 250.00, 10, 'Nuevo', 3, 'c4f8b857-1111-4d1e-9000-000000000012', false),
+('d161cf6e-ddb4-4237-8b61-1e6ffe44730d', 'Gorra Nike Sportswear', 'Algodón, ajustable.', 180.00, 8, 'Nuevo', 4, 'c4f8b857-1111-4d1e-9000-000000000012', false),
+('e9763e30-7be5-4c3f-8ea6-74842d2f2297', 'Maletín Samsonite 20', 'Ruedas giratorias, ABS rígido.', 950.00, 7, 'Usado', 6, 'c4f8b857-1111-4d1e-9000-000000000012', false),
+('083c1ec7-ebea-4dd7-a4f8-3e0fb1f177c2', 'Freidora de aire Philips XL', 'Capacidad de 5.5L, pantalla digital.', 1100.00, 6, 'Usado', 2, 'c4f8b857-1111-4d1e-9000-000000000012', false),
+('bbde748f-3315-429f-baf5-86432cbbae04', 'Set de herramientas Bosch 46 piezas', 'Brocas, llaves, y maletín.', 550.00, 4, 'Usado', 6, 'c4f8b857-1111-4d1e-9000-000000000012', false),
+('0ea7e229-1b5d-40ce-a544-c1fc16d22efd', 'Mochila Herschel Pop Quiz', 'Compartimiento acolchado para laptop.', 420.00, 14, 'Nuevo', 3, 'c4f8b857-1111-4d1e-9000-000000000012', false),
+('e8fb29d0-8ccd-4f12-bf87-d520eea5567e', 'Termo Stanley Classic 1L', 'Mantiene temperatura 24h.', 300.00, 5, 'Nuevo', 6, 'c4f8b857-1111-4d1e-9000-000000000012', false),
+('2fe241d5-fdcb-4c58-8679-532176ab3d9b', 'Alfombra persa 2x3m', 'Diseño clásico oriental.', 950.00, 15, 'Usado', 5, 'c4f8b857-1111-4d1e-9000-000000000012', false),
+('28a10d5b-89ce-4292-b089-a5514b0a7c5a', 'Bolígrafo Parker Jotter', 'Acero inoxidable, recargable.', 150.00, 9, 'Nuevo', 3, 'c4f8b857-1111-4d1e-9000-000000000012', false),
+('9e0414a7-54a2-47bf-811c-93263d879d37', 'Vela aromática Yankee Candle', 'Aroma a vainilla.', 120.00, 7, 'Nuevo', 5, 'c4f8b857-1111-4d1e-9000-000000000012', false),
+('ba95fe6e-ddb7-4f0e-b2cd-3b623933b80a', 'Mouse inalámbrico Razer Pro Click', 'Mouse ergonómico inalámbrico con sensor óptico.', 450.00, 7, 'Usado', 1, 'c4f8b857-1111-4d1e-9000-000000000013', false),
+('c91aa0ff-58c5-446d-a045-bc8dcab4c65b', 'Horno tostador Hamilton Beach', 'Capacidad de 6 rebanadas, temporizador.', 600.00, 15, 'Nuevo', 2, 'c4f8b857-1111-4d1e-9000-000000000013', false),
+('fdb294d1-3a61-4609-a38c-02dffcb89ff0', 'Smartwatch Huawei GT3', 'Reloj inteligente con GPS integrado.', 1800.00, 15, 'Usado', 1, 'c4f8b857-1111-4d1e-9000-000000000013', false),
+('4b0371d6-163c-4574-8175-62b9f96cf9b1', 'Perfume Chanel Bleu 100ml', 'Fragancia elegante amaderada.', 1200.00, 5, 'Usado', 4, 'c4f8b857-1111-4d1e-9000-000000000013', false),
+('1f4d2e87-8166-4dee-ab3b-13338be92024', 'Libro Estructuras de Datos en Java', '4ta edición, Pearson.', 350.00, 10, 'Nuevo', 3, 'c4f8b857-1111-4d1e-9000-000000000013', false),
+('3af5c7db-1c27-46ff-99d4-2e60e13af212', 'Tablet Samsung Galaxy Tab S6 Lite', 'Pantalla de 10.4, S Pen incluido.', 2900.00, 11, 'Nuevo', 1, 'c4f8b857-1111-4d1e-9000-000000000013', false),
+('2165b770-07d5-4693-a4b6-e37271e38014', 'Calculadora Casio FX-991EX', 'Pantalla natural, 552 funciones.', 300.00, 6, 'Nuevo', 3, 'c4f8b857-1111-4d1e-9000-000000000013', false),
+('d52c852e-828d-4c16-bd42-6acbc267c6d2', 'Libro Matemáticas Discretas', '3ra edición, McGraw-Hill.', 280.00, 3, 'Usado', 3, 'c4f8b857-1111-4d1e-9000-000000000013', false),
+('0a64d7ac-759e-420e-a0de-b29bf115dacc', 'Bicicleta estática Reebok Jet 100', '12 programas, pantalla LCD.', 2500.00, 15, 'Nuevo', 6, 'c4f8b857-1111-4d1e-9000-000000000013', false),
+('4589bf1c-052d-440d-9954-0782cf795b54', 'Plancha Oster SteamGlide', 'Base cerámica, vapor ajustable.', 350.00, 9, 'Usado', 2, 'c4f8b857-1111-4d1e-9000-000000000013', false),
+('2c8d9a11-ce7b-4cf1-896e-35b6b0fc1225', 'Cuadro abstracto moderno', 'Lienzo 80x60cm, tonos azules.', 350.00, 2, 'Nuevo', 5, 'c4f8b857-1111-4d1e-9000-000000000014', false),
+('6c77c958-adfd-4ce2-a247-e14728365203', 'Monitor Samsung Odyssey 27', 'Pantalla curva QHD 144Hz.', 2800.00, 9, 'Nuevo', 1, 'c4f8b857-1111-4d1e-9000-000000000014', false),
+('3753731f-f6c7-4589-ba35-bfcb91a73713', 'Lámpara de pie minimalista', 'Estructura metálica, luz cálida.', 400.00, 12, 'Nuevo', 5, 'c4f8b857-1111-4d1e-9000-000000000014', false),
+('77b51280-3c61-477b-b420-67266d8c583c', 'Juego de sartenes Tefal Ingenio', 'Set de 3 piezas antiadherentes.', 650.00, 6, 'Nuevo', 2, 'c4f8b857-1111-4d1e-9000-000000000014', false),
+('07673826-6c14-4095-8bb8-0e34c5356d9d', 'Reloj Casio G-Shock GA2100', 'Resistente al agua, diseño robusto.', 850.00, 7, 'Usado', 4, 'c4f8b857-1111-4d1e-9000-000000000014', false),
+('fdfe10a6-ce76-4102-bf1b-c8ee1174da21', 'Botella Hydro Flask 1L', 'Aislamiento al vacío, acero inoxidable.', 300.00, 11, 'Nuevo', 6, 'c4f8b857-1111-4d1e-9000-000000000014', false),
+('4c66d39a-a665-4fe7-b367-29d7bbc65f37', 'Cuaderno Moleskine Classic', 'Tapa dura, 200 páginas.', 180.00, 15, 'Nuevo', 3, 'c4f8b857-1111-4d1e-9000-000000000014', false),
+('6ae7d8ea-1545-4486-92da-5c6b6dd225a7', 'Set de resaltadores Faber-Castell', '6 colores pastel.', 80.00, 15, 'Nuevo', 3, 'c4f8b857-1111-4d1e-9000-000000000014', false),
+('ad50e23f-a304-4c57-85a8-1fb3aff88f69', 'Cuerda para saltar Adidas', 'Rodamientos de acero.', 120.00, 13, 'Usado', 6, 'c4f8b857-1111-4d1e-9000-000000000014', false),
+('28e00aef-a072-46b8-b748-8a09f29f7327', 'Cámara web AVerMedia PW315', 'Full HD con autoenfoque.', 700.00, 11, 'Nuevo', 1, 'c4f8b857-1111-4d1e-9000-000000000014', false),
+('d5a1d473-39e0-4845-98ce-13716d7eba42', 'Powerbank Anker 20000mAh', 'Carga rápida USB-C.', 350.00, 15, 'Nuevo', 6, 'c4f8b857-1111-4d1e-9000-000000000015', false),
+('e2b3a4f5-5d12-4e5a-b1b8-9b2a1f4e3c7d', 'Juego de destornilladores Wiha', 'Set de precisión, 12 piezas.', 220.00, 10, 'Nuevo', 6, 'c4f8b857-1111-4d1e-9000-000000000015', false),
+('c71b5d39-ff23-41f3-987f-5b6e1f7d2c9a', 'Silla ergonómica Herman Miller', 'Ajustable, soporte lumbar.', 4500.00, 3, 'Usado', 5, 'c4f8b857-1111-4d1e-9000-000000000015', false),
+('f3d0b1ea-2c8d-4b3b-a2f4-98d7f1c4e6a2', 'Audífonos Sony WH-1000XM4', 'Cancelación de ruido, Bluetooth.', 2200.00, 7, 'Nuevo', 1, 'c4f8b857-1111-4d1e-9000-000000000015', false),
+('d8c9b2f1-4e5b-4a2a-9e1c-0f2e5a3d1b6f', 'Libro Cálculo Diferencial e Integral', 'Tercera edición, McGraw-Hill.', 320.00, 12, 'Nuevo', 3, 'c4f8b857-1111-4d1e-9000-000000000015', false),
+('b7e1c2d3-5f6a-4d7b-a8c9-1f2e3b4a5c6d', 'Reloj inteligente Apple Watch SE', 'GPS, pantalla Retina.', 3500.00, 6, 'Nuevo', 1, 'c4f8b857-1111-4d1e-9000-000000000015', false),
+('a6b7c8d9-0e1f-4a2b-9c3d-5f6a7b8c9d0e', 'Zapatillas deportivas Nike Air Max', 'Cómodas y ligeras.', 950.00, 9, 'Usado', 4, 'c4f8b857-1111-4d1e-9000-000000000015', false),
+('f5e4d3c2-b1a0-4d9e-8f7b-6a5c4d3e2f1b', 'Cafetera Nespresso Essenza Mini', 'Compacta, rápida.', 950.00, 7, 'Nuevo', 2, 'c4f8b857-1111-4d1e-9000-000000000015', false),
+('c3b2a1d0-e9f8-4b7c-8d6a-5c4b3e2f1a0d', 'Mouse Logitech MX Master 3', 'Ergonómico, inalámbrico.', 950.00, 10, 'Usado', 1, 'c4f8b857-1111-4d1e-9000-000000000016', false),
+('b2a1d0c9-f8e7-4b6c-9d5a-4c3b2e1f0a9d', 'Libro Programación en Python', 'Edición 2023, Wiley.', 280.00, 8, 'Nuevo', 3, 'c4f8b857-1111-4d1e-9000-000000000016', false),
+('a1b0c9d8-e7f6-4b5c-8d4a-3c2b1e0f9a8d', 'Monitor LG 24MP59G', 'Full HD, 75Hz, IPS.', 1200.00, 5, 'Nuevo', 1, 'c4f8b857-1111-4d1e-9000-000000000016', false),
+('f0e9d8c7-b6a5-4b4c-9d3a-2c1b0e9f8a7d', 'Bolso Michael Kors original', 'Cuero genuino, color negro.', 2200.00, 4, 'Usado', 4, 'c4f8b857-1111-4d1e-9000-000000000016', false),
+('e9d8c7b6-a5f4-4b3c-8d2a-1c0b9e8f7a6d', 'Set de lápices Staedtler 12pcs', 'Grafito HB, profesional.', 120.00, 15, 'Nuevo', 3, 'c4f8b857-1111-4d1e-9000-000000000016', false),
+('d8c7b6a5-f4e3-4b2c-9d1a-0c9b8e7f6a5d', 'Horno eléctrico Oster 30L', 'Función grill, 8 programas.', 1300.00, 7, 'Usado', 2, 'c4f8b857-1111-4d1e-9000-000000000016', false),
+('c7b6a5d4-e3f2-4b1c-8d0a-9c8b7e6f5a4d', 'Juego de cubiertos Tramontina 24 piezas', 'Acero inoxidable.', 550.00, 12, 'Nuevo', 2, 'c4f8b857-1111-4d1e-9000-000000000016', false),
+('b6a5d4c3-f2e1-4b0c-9d9a-8c7b6e5f4a3d', 'Tablet Apple iPad 9th Gen', '10.2 pulgadas, 64GB.', 3200.00, 5, 'Nuevo', 1, 'c4f8b857-1111-4d1e-9000-000000000016', false),
+('a5d4c3b2-e1f0-4b9c-8d8a-7c6b5e4f3a2d', 'Set de ollas WMF 5 piezas', 'Acero inoxidable, antiadherente.', 1800.00, 6, 'Nuevo', 2, 'c4f8b857-1111-4d1e-9000-000000000016', false),
+('f4c3b2a1-d0e9-4b8c-9d7a-6c5b4e3f2a1d', 'Libro Física Universitaria', 'Volumen 1, Pearson.', 320.00, 9, 'Usado', 3, 'c4f8b857-1111-4d1e-9000-000000000016', false),
+('e3b2a1c0-d9f8-4b7c-8d6a-5c4b3e2f1a0d', 'Silla gamer DXRacer Formula', 'Ergonómica, azul.', 3500.00, 3, 'Usado', 5, 'c4f8b857-1111-4d1e-9000-000000000017', false),
+('d2a1c0b9-c8f7-4b6c-9d5a-4c3b2e1f0a9d', 'Mousepad SteelSeries QcK', 'Extra grande, superficie texturizada.', 250.00, 14, 'Nuevo', 1, 'c4f8b857-1111-4d1e-9000-000000000017', false),
+('c1b0a9d8-b7f6-4b5c-8d4a-3c2b1e0f9a8d', 'Libro Estructuras Discretas', '5ta edición, McGraw-Hill.', 280.00, 10, 'Usado', 3, 'c4f8b857-1111-4d1e-9000-000000000017', false),
+('b0a9d8c7-a6f5-4b4c-9d3a-2c1b0e9f8a7d', 'Reloj Fossil Q Explorist HR', 'Smartwatch híbrido, pantalla táctil.', 1800.00, 6, 'Nuevo', 4, 'c4f8b857-1111-4d1e-9000-000000000017', false),
+('a9d8c7b6-95f4-4b3c-8d2a-1c0b9e8f7a6d', 'Bolsa de gimnasio Adidas', 'Resistente, con compartimento para zapatos.', 300.00, 12, 'Nuevo', 4, 'c4f8b857-1111-4d1e-9000-000000000017', false),
+('f1e2d3c4-b5a6-4c7d-8e9f-0a1b2c3d4e5f', 'Teclado mecánico Keychron K2', 'Bluetooth, retroiluminado RGB.', 1200.00, 8, 'Nuevo', 1, 'c4f8b857-1111-4d1e-9000-000000000017', false),
+('e1d2c3b4-a5f6-4b7c-8d9e-0f1a2b3c4d5e', 'Auriculares Bose QuietComfort 35 II', 'Cancelación activa de ruido, Bluetooth.', 2500.00, 5, 'Usado', 1, 'c4f8b857-1111-4d1e-9000-000000000017', false),
+('d1c2b3a4-f5e6-4b7c-8d9a-0b1c2d3e4f5a', 'Cámara Canon EOS M50', 'Mirrorless, 24.1MP, grabación 4K.', 7500.00, 2, 'Nuevo', 1, 'c4f8b857-1111-4d1e-9000-000000000017', false),
+('c1b2a3d4-e5f6-4b7c-8d9a-0a1b2c3d4e5f', 'Libro Introducción a la Química', 'Séptima edición, McGraw-Hill.', 300.00, 10, 'Nuevo', 3, 'c4f8b857-1111-4d1e-9000-000000000017', false),
+('b1a2c3d4-f5e6-4b7c-8d9a-0f1e2d3c4b5a', 'Mochila Herschel Little America', '20L, color negro.', 850.00, 6, 'Usado', 4, 'c4f8b857-1111-4d1e-9000-000000000017', false),
+('a1b2c3d4-e5f6-4b7c-8d9a-0a1b2c3d4e5f', 'Lámpara LED de escritorio Xiaomi', 'Ajustable, luz cálida/fría.', 320.00, 12, 'Nuevo', 2, 'c4f8b857-1111-4d1e-9000-000000000017', false),
+('f2e3d4c5-b6a7-4c8d-9e0f-1a2b3c4d5e6f', 'Reloj inteligente Samsung Galaxy Watch 5', 'GPS, 44mm, monitorización de salud.', 2800.00, 4, 'Nuevo', 1, 'c4f8b857-1111-4d1e-9000-000000000018', false),
+('e2d3c4b5-a6f7-4c8d-9e0f-1b2c3d4e5f6a', 'Zapatos deportivos Puma RS-X', 'Cómodos, suela EVA.', 780.00, 9, 'Usado', 4, 'c4f8b857-1111-4d1e-9000-000000000018', false),
+('d2c3b4a5-f6e7-4c8d-9e0f-1c2d3e4f5a6b', 'Libro Álgebra Lineal', 'Cuarta edición, Pearson.', 320.00, 7, 'Nuevo', 3, 'c4f8b857-1111-4d1e-9000-000000000018', false),
+('c2b3a4d5-e6f7-4c8d-9e0f-1d2c3b4a5f6e', 'Silla de oficina Steelcase Leap', 'Ergonómica, ajustable.', 4800.00, 3, 'Nuevo', 5, 'c4f8b857-1111-4d1e-9000-000000000018', false),
+('b2a3c4d5-f6e7-4c8d-9e0f-1e2b3c4d5a6f', 'Tablet Samsung Galaxy Tab S8', '11 pulgadas, 128GB.', 4300.00, 4, 'Nuevo', 1, 'c4f8b857-1111-4d1e-9000-000000000018', false),
+('a2b3c4d5-e6f7-4c8d-9e0f-1f2a3b4c5d6e', 'Set de ollas T-fal 7 piezas', 'Anti-adherente, acero inoxidable.', 2100.00, 5, 'Nuevo', 2, 'c4f8b857-1111-4d1e-9000-000000000018', false),
+('f3e4d5c6-b7a8-4c9d-0e1f-2a3b4c5d6e7f', 'Mouse Logitech G Pro X', 'Gaming, sensor HERO 25K.', 950.00, 10, 'Nuevo', 1, 'c4f8b857-1111-4d1e-9000-000000000018', false),
+('e3d4c5b6-a7f8-4c9d-0e1f-2b3c4d5e6f7a', 'Libro Mecánica de Fluidos', 'Sexta edición, Wiley.', 280.00, 8, 'Usado', 3, 'c4f8b857-1111-4d1e-9000-000000000018', false),
+('d3c4b5a6-f7e8-4c9d-0e1f-2c3d4e5f6a7b', 'Horno microondas Panasonic', '20L, 800W, función descongelar.', 1200.00, 6, 'Nuevo', 2, 'c4f8b857-1111-4d1e-9000-000000000018', false),
+('c3b4a5d6-e7f8-4c9d-0e1f-2d3c4b5a6f7e', 'Juego de cubiertos Zwilling 24 piezas', 'Acero inoxidable, elegante.', 650.00, 12, 'Nuevo', 2, 'c4f8b857-1111-4d1e-9000-000000000018', false),
+('b3a4c5d6-f7e8-4c9d-0e1f-2e3b4c5d6a7f', 'Reloj Casio G-Shock', 'Resistente al agua, cronómetro.', 900.00, 7, 'Usado', 4, 'c4f8b857-1111-4d1e-9000-000000000019', false),
+('a3b4c5d6-e7f8-4c9d-0e1f-2f3a4b5c6d7e', 'Bolsa Tote Michael Kors', 'Cuero sintético, color marrón.', 2200.00, 5, 'Nuevo', 4, 'c4f8b857-1111-4d1e-9000-000000000019', false),
+('f4e5d6c7-b8a9-4d0e-1f2a-3b4c5d6e7f8a', 'Laptop Dell XPS 13', 'i7, 16GB RAM, 512GB SSD.', 9500.00, 2, 'Nuevo', 1, 'c4f8b857-1111-4d1e-9000-000000000019', false),
+('e4d5c6b7-a8f9-4d0e-1f2a-3c4b5d6e7f8a', 'Auriculares JBL Tune 510BT', 'Bluetooth, 40 horas de batería.', 450.00, 15, 'Nuevo', 1, 'c4f8b857-1111-4d1e-9000-000000000019', false),
+('d4c5b6a7-f8e9-4d0e-1f2a-3d4c5b6a7f8e', 'Libro Biología Celular', 'Cuarta edición, Pearson.', 320.00, 9, 'Nuevo', 3, 'c4f8b857-1111-4d1e-9000-000000000019', false),
+('c4b5a6d7-e8f9-4d0e-1f2a-3e4c5b6a7f8a', 'Silla plegable Coleman', 'Resistente, ideal camping.', 350.00, 6, 'Nuevo', 5, 'c4f8b857-1111-4d1e-9000-000000000019', false),
+('b4a5c6d7-f8e9-4d0e-1f2a-3f4b5c6d7a8e', 'Mouse inalámbrico Razer DeathAdder', 'Gaming, 16000 DPI.', 950.00, 10, 'Usado', 1, 'c4f8b857-1111-4d1e-9000-000000000019', false),
+('a4b5c6d7-e8f9-4d0e-1f2a-3a4b5c6d7e8f', 'Tablet Lenovo Tab P11', '11 pulgadas, 128GB.', 3300.00, 4, 'Nuevo', 1, 'c4f8b857-1111-4d1e-9000-000000000019', false),
+('68bf1dd6-2e0c-4d6d-a7d3-e8dacabb5636', 'Shampoo Pantene Pro-V 400ml', 'Fortalece el cabello.', 55.00, 15, 'Nuevo', 4, 'c4f8b857-1111-4d1e-9000-000000000017', false),
+('98c6d2a7-320c-4149-b144-0bd45e064163', 'Tapete para yoga Manduka', 'Antideslizante profesional.', 420.00, 2, 'Usado', 6, 'c4f8b857-1111-4d1e-9000-000000000017', false),
+('b5796591-d659-4403-bfcd-fc9f5eea7b6e', 'Calculadora Texas Instruments TI-84 Plus', 'Gráfica, con pantalla a color.', 900.00, 11, 'Nuevo', 3, 'c4f8b857-1111-4d1e-9000-000000000017', false);
 
 --
 -- TOC entry 5107 (class 0 OID 24728)
@@ -1010,8 +990,6 @@ d61bbd23-8095-449a-80b1-2b3db5e231e2	Libro Estructuras de Datos en Java	4ta edic
 -- Data for Name: rating; Type: TABLE DATA; Schema: productos; Owner: postgres
 --
 
-COPY productos.rating (id, id_producto, promedio) FROM stdin;
-\.
 
 
 --
@@ -1020,28 +998,26 @@ COPY productos.rating (id, id_producto, promedio) FROM stdin;
 -- Data for Name: persona; Type: TABLE DATA; Schema: usuarios; Owner: postgres
 --
 
-COPY usuarios.persona (dpi, nombre, direccion, correo, ganancias, id_usuario) FROM stdin;
-1000000000101	Administrador General	Ciudad de Guatemala	admin@ecommerce.gt	0.00	c4f8b857-1111-4d1e-9000-000000000001
-2000000000101	Moderador 1	Quetzaltenango	mod1@ecommerce.gt	0.00	c4f8b857-1111-4d1e-9000-000000000002
-2000000000102	Moderador 2	Quetzaltenango	mod2@ecommerce.gt	0.00	c4f8b857-1111-4d1e-9000-000000000003
-2000000000103	Moderador 3	Quetzaltenango	mod3@ecommerce.gt	0.00	c4f8b857-1111-4d1e-9000-000000000004
-2000000000104	Moderador 4	Quetzaltenango	mod4@ecommerce.gt	0.00	c4f8b857-1111-4d1e-9000-000000000005
-2000000000105	Moderador 5	Quetzaltenango	mod5@ecommerce.gt	0.00	c4f8b857-1111-4d1e-9000-000000000006
-3000000000101	Logística 1	Ciudad de Guatemala	log1@ecommerce.gt	0.00	c4f8b857-1111-4d1e-9000-000000000007
-3000000000102	Logística 2	Ciudad de Guatemala	log2@ecommerce.gt	0.00	c4f8b857-1111-4d1e-9000-000000000008
-3000000000103	Logística 3	Ciudad de Guatemala	log3@ecommerce.gt	0.00	c4f8b857-1111-4d1e-9000-000000000009
-4000000000101	Usuario 1	Quetzaltenango	user1@correo.gt	0.00	c4f8b857-1111-4d1e-9000-000000000010
-4000000000102	Usuario 2	Quetzaltenango	user2@correo.gt	0.00	c4f8b857-1111-4d1e-9000-000000000011
-4000000000103	Usuario 3	Quetzaltenango	user3@correo.gt	0.00	c4f8b857-1111-4d1e-9000-000000000012
-4000000000104	Usuario 4	Quetzaltenango	user4@correo.gt	0.00	c4f8b857-1111-4d1e-9000-000000000013
-4000000000105	Usuario 5	Quetzaltenango	user5@correo.gt	0.00	c4f8b857-1111-4d1e-9000-000000000014
-4000000000106	Usuario 6	Quetzaltenango	user6@correo.gt	0.00	c4f8b857-1111-4d1e-9000-000000000015
-4000000000107	Usuario 7	Quetzaltenango	user7@correo.gt	0.00	c4f8b857-1111-4d1e-9000-000000000016
-4000000000108	Usuario 8	Quetzaltenango	user8@correo.gt	0.00	c4f8b857-1111-4d1e-9000-000000000017
-4000000000109	Usuario 9	Quetzaltenango	user9@correo.gt	0.00	c4f8b857-1111-4d1e-9000-000000000018
-4000000000110	Usuario 10	Quetzaltenango	user10@correo.gt	0.00	c4f8b857-1111-4d1e-9000-000000000019
-\.
-
+INSERT INTO usuarios.persona (dpi, nombre, direccion, correo, ganancias, id_usuario) VALUES
+('1000000000101', 'Administrador General', 'Ciudad de Guatemala', 'admin@ecommerce.gt', 0.00, 'c4f8b857-1111-4d1e-9000-000000000001'),
+('2000000000101', 'Moderador 1', 'Quetzaltenango', 'mod1@ecommerce.gt', 0.00, 'c4f8b857-1111-4d1e-9000-000000000002'),
+('2000000000102', 'Moderador 2', 'Quetzaltenango', 'mod2@ecommerce.gt', 0.00, 'c4f8b857-1111-4d1e-9000-000000000003'),
+('2000000000103', 'Moderador 3', 'Quetzaltenango', 'mod3@ecommerce.gt', 0.00, 'c4f8b857-1111-4d1e-9000-000000000004'),
+('2000000000104', 'Moderador 4', 'Quetzaltenango', 'mod4@ecommerce.gt', 0.00, 'c4f8b857-1111-4d1e-9000-000000000005'),
+('2000000000105', 'Moderador 5', 'Quetzaltenango', 'mod5@ecommerce.gt', 0.00, 'c4f8b857-1111-4d1e-9000-000000000006'),
+('3000000000101', 'Logística 1', 'Ciudad de Guatemala', 'log1@ecommerce.gt', 0.00, 'c4f8b857-1111-4d1e-9000-000000000007'),
+('3000000000102', 'Logística 2', 'Ciudad de Guatemala', 'log2@ecommerce.gt', 0.00, 'c4f8b857-1111-4d1e-9000-000000000008'),
+('3000000000103', 'Logística 3', 'Ciudad de Guatemala', 'log3@ecommerce.gt', 0.00, 'c4f8b857-1111-4d1e-9000-000000000009'),
+('4000000000101', 'Usuario 1', 'Quetzaltenango', 'user1@correo.gt', 0.00, 'c4f8b857-1111-4d1e-9000-000000000010'),
+('4000000000102', 'Usuario 2', 'Quetzaltenango', 'user2@correo.gt', 0.00, 'c4f8b857-1111-4d1e-9000-000000000011'),
+('4000000000103', 'Usuario 3', 'Quetzaltenango', 'user3@correo.gt', 0.00, 'c4f8b857-1111-4d1e-9000-000000000012'),
+('4000000000104', 'Usuario 4', 'Quetzaltenango', 'user4@correo.gt', 0.00, 'c4f8b857-1111-4d1e-9000-000000000013'),
+('4000000000105', 'Usuario 5', 'Quetzaltenango', 'user5@correo.gt', 0.00, 'c4f8b857-1111-4d1e-9000-000000000014'),
+('4000000000106', 'Usuario 6', 'Quetzaltenango', 'user6@correo.gt', 0.00, 'c4f8b857-1111-4d1e-9000-000000000015'),
+('4000000000107', 'Usuario 7', 'Quetzaltenango', 'user7@correo.gt', 0.00, 'c4f8b857-1111-4d1e-9000-000000000016'),
+('4000000000108', 'Usuario 8', 'Quetzaltenango', 'user8@correo.gt', 0.00, 'c4f8b857-1111-4d1e-9000-000000000017'),
+('4000000000109', 'Usuario 9', 'Quetzaltenango', 'user9@correo.gt', 0.00, 'c4f8b857-1111-4d1e-9000-000000000018'),
+('4000000000110', 'Usuario 10', 'Quetzaltenango', 'user10@correo.gt', 0.00, 'c4f8b857-1111-4d1e-9000-000000000019');
 
 --
 -- TOC entry 5102 (class 0 OID 24648)
@@ -1049,8 +1025,6 @@ COPY usuarios.persona (dpi, nombre, direccion, correo, ganancias, id_usuario) FR
 -- Data for Name: tarjeta; Type: TABLE DATA; Schema: usuarios; Owner: postgres
 --
 
-COPY usuarios.tarjeta (numero, fecha_vencimiento, cvv, id_usuario, nombre) FROM stdin;
-\.
 
 
 --
@@ -1059,13 +1033,11 @@ COPY usuarios.tarjeta (numero, fecha_vencimiento, cvv, id_usuario, nombre) FROM 
 -- Data for Name: tipo_usuario; Type: TABLE DATA; Schema: usuarios; Owner: postgres
 --
 
-COPY usuarios.tipo_usuario (id, nombre) FROM stdin;
-1	Administrador
-2	Moderador
-3	Logistica
-4	Comun
-\.
-
+INSERT INTO usuarios.tipo_usuario (id, nombre) VALUES
+(1, 'Administrador'),
+(2, 'Moderador'),
+(3, 'Logistica'),
+(4, 'Comun');
 
 --
 -- TOC entry 5100 (class 0 OID 24624)
@@ -1073,28 +1045,26 @@ COPY usuarios.tipo_usuario (id, nombre) FROM stdin;
 -- Data for Name: usuario; Type: TABLE DATA; Schema: usuarios; Owner: postgres
 --
 
-COPY usuarios.usuario (id, usuario, salt, password, id_tipo) FROM stdin;
-c4f8b857-1111-4d1e-9000-000000000001	admin	salt123	admin123	1
-c4f8b857-1111-4d1e-9000-000000000002	moderador1	salt123	mod123	2
-c4f8b857-1111-4d1e-9000-000000000003	moderador2	salt123	mod123	2
-c4f8b857-1111-4d1e-9000-000000000004	moderador3	salt123	mod123	2
-c4f8b857-1111-4d1e-9000-000000000005	moderador4	salt123	mod123	2
-c4f8b857-1111-4d1e-9000-000000000006	moderador5	salt123	mod123	2
-c4f8b857-1111-4d1e-9000-000000000007	logistica1	salt123	log123	3
-c4f8b857-1111-4d1e-9000-000000000008	logistica2	salt123	log123	3
-c4f8b857-1111-4d1e-9000-000000000009	logistica3	salt123	log123	3
-c4f8b857-1111-4d1e-9000-000000000010	usuario1	salt123	user123	4
-c4f8b857-1111-4d1e-9000-000000000011	usuario2	salt123	user123	4
-c4f8b857-1111-4d1e-9000-000000000012	usuario3	salt123	user123	4
-c4f8b857-1111-4d1e-9000-000000000013	usuario4	salt123	user123	4
-c4f8b857-1111-4d1e-9000-000000000014	usuario5	salt123	user123	4
-c4f8b857-1111-4d1e-9000-000000000015	usuario6	salt123	user123	4
-c4f8b857-1111-4d1e-9000-000000000016	usuario7	salt123	user123	4
-c4f8b857-1111-4d1e-9000-000000000017	usuario8	salt123	user123	4
-c4f8b857-1111-4d1e-9000-000000000018	usuario9	salt123	user123	4
-c4f8b857-1111-4d1e-9000-000000000019	usuario10	salt123	user123	4
-\.
-
+INSERT INTO usuarios.usuario (id, usuario, salt, password, id_tipo) VALUES
+('c4f8b857-1111-4d1e-9000-000000000001', 'admin', 'salt123', 'admin123', 1),
+('c4f8b857-1111-4d1e-9000-000000000002', 'moderador1', 'salt123', 'mod123', 2),
+('c4f8b857-1111-4d1e-9000-000000000003', 'moderador2', 'salt123', 'mod123', 2),
+('c4f8b857-1111-4d1e-9000-000000000004', 'moderador3', 'salt123', 'mod123', 2),
+('c4f8b857-1111-4d1e-9000-000000000005', 'moderador4', 'salt123', 'mod123', 2),
+('c4f8b857-1111-4d1e-9000-000000000006', 'moderador5', 'salt123', 'mod123', 2),
+('c4f8b857-1111-4d1e-9000-000000000007', 'logistica1', 'salt123', 'log123', 3),
+('c4f8b857-1111-4d1e-9000-000000000008', 'logistica2', 'salt123', 'log123', 3),
+('c4f8b857-1111-4d1e-9000-000000000009', 'logistica3', 'salt123', 'log123', 3),
+('c4f8b857-1111-4d1e-9000-000000000010', 'usuario1', 'salt123', 'user123', 4),
+('c4f8b857-1111-4d1e-9000-000000000011', 'usuario2', 'salt123', 'user123', 4),
+('c4f8b857-1111-4d1e-9000-000000000012', 'usuario3', 'salt123', 'user123', 4),
+('c4f8b857-1111-4d1e-9000-000000000013', 'usuario4', 'salt123', 'user123', 4),
+('c4f8b857-1111-4d1e-9000-000000000014', 'usuario5', 'salt123', 'user123', 4),
+('c4f8b857-1111-4d1e-9000-000000000015', 'usuario6', 'salt123', 'user123', 4),
+('c4f8b857-1111-4d1e-9000-000000000016', 'usuario7', 'salt123', 'user123', 4),
+('c4f8b857-1111-4d1e-9000-000000000017', 'usuario8', 'salt123', 'user123', 4),
+('c4f8b857-1111-4d1e-9000-000000000018', 'usuario9', 'salt123', 'user123', 4),
+('c4f8b857-1111-4d1e-9000-000000000019', 'usuario10', 'salt123', 'user123', 4);
 
 --
 -- TOC entry 5112 (class 0 OID 24763)
@@ -1102,8 +1072,6 @@ c4f8b857-1111-4d1e-9000-000000000019	usuario10	salt123	user123	4
 -- Data for Name: cart; Type: TABLE DATA; Schema: ventas; Owner: postgres
 --
 
-COPY ventas.cart (id, id_usuario, total) FROM stdin;
-\.
 
 
 --
@@ -1112,8 +1080,6 @@ COPY ventas.cart (id, id_usuario, total) FROM stdin;
 -- Data for Name: detalle_cart; Type: TABLE DATA; Schema: ventas; Owner: postgres
 --
 
-COPY ventas.detalle_cart (id, subtotal, cantidad, id_producto, id_cart) FROM stdin;
-\.
 
 
 --
@@ -1122,8 +1088,6 @@ COPY ventas.detalle_cart (id, subtotal, cantidad, id_producto, id_cart) FROM std
 -- Data for Name: detalle_pedido; Type: TABLE DATA; Schema: ventas; Owner: postgres
 --
 
-COPY ventas.detalle_pedido (id, subtotal, cantidad, id_producto, id_pedido) FROM stdin;
-\.
 
 
 --
@@ -1132,8 +1096,6 @@ COPY ventas.detalle_pedido (id, subtotal, cantidad, id_producto, id_pedido) FROM
 -- Data for Name: estado_pedido; Type: TABLE DATA; Schema: ventas; Owner: postgres
 --
 
-COPY ventas.estado_pedido (id, nombre) FROM stdin;
-\.
 
 
 --
@@ -1142,8 +1104,6 @@ COPY ventas.estado_pedido (id, nombre) FROM stdin;
 -- Data for Name: pago; Type: TABLE DATA; Schema: ventas; Owner: postgres
 --
 
-COPY ventas.pago (id, cantidad, id_tarjeta) FROM stdin;
-\.
 
 
 --
@@ -1152,8 +1112,6 @@ COPY ventas.pago (id, cantidad, id_tarjeta) FROM stdin;
 -- Data for Name: pedido; Type: TABLE DATA; Schema: ventas; Owner: postgres
 --
 
-COPY ventas.pedido (id, total, fecha_envio, fecha_entrega, id_usuario, id_pago, id_estado) FROM stdin;
-\.
 
 
 --
@@ -1164,7 +1122,6 @@ COPY ventas.pedido (id, total, fecha_envio, fecha_entrega, id_usuario, id_pago, 
 
 SELECT pg_catalog.setval('general.entrega_id_seq', 1, false);
 
-
 --
 -- TOC entry 5151 (class 0 OID 0)
 -- Dependencies: 247
@@ -1173,7 +1130,6 @@ SELECT pg_catalog.setval('general.entrega_id_seq', 1, false);
 
 SELECT pg_catalog.setval('general.notificacion_id_seq', 1, false);
 
-
 --
 -- TOC entry 5152 (class 0 OID 0)
 -- Dependencies: 249
@@ -1181,7 +1137,6 @@ SELECT pg_catalog.setval('general.notificacion_id_seq', 1, false);
 --
 
 SELECT pg_catalog.setval('general.revision_producto_id_seq', 1, false);
-
 
 --
 -- TOC entry 5153 (class 0 OID 0)
@@ -1694,13 +1649,4 @@ ALTER TABLE ONLY ventas.pedido
 
 ALTER TABLE ONLY ventas.pedido
     ADD CONSTRAINT pedido_id_usuario_fkey FOREIGN KEY (id_usuario) REFERENCES usuarios.usuario(id);
-
-
--- Completed on 2025-10-06 16:55:50
-
---
--- PostgreSQL database dump complete
---
-
-\unrestrict xMBBA3Nf5zNm05W5hULB4hPlun9iqPkLaJztY9vlPiUlUvHjG5bLQ0B4pDZKd0G
 

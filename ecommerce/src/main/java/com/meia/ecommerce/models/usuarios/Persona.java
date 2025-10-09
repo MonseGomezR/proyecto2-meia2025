@@ -1,21 +1,21 @@
 package com.meia.ecommerce.models.usuarios;
 
-import jakarta.persistence.Column;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
+
 @NoArgsConstructor
 
 @Entity
@@ -26,20 +26,12 @@ public class Persona {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String dpi;
 
-    @Column(name = "nombre", nullable = false)
     private String nombre;
-
-    @Column(name = "direccion", nullable = false)
     private String direccion;
-
-    @Column(name = "correo", nullable = false)
     private String correo;
-
-    @Column(name = "ganancias", nullable = false)
     private Double ganancias;
 
-    @OneToOne
-    @JoinColumn(name = "id_usuario", nullable = false)
+    @OneToOne(mappedBy = "persona", fetch = FetchType.LAZY) 
+    @JsonIgnore
     private Usuario usuario;
-
 }

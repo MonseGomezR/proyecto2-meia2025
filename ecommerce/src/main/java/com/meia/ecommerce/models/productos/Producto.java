@@ -2,6 +2,7 @@ package com.meia.ecommerce.models.productos;
 
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.meia.ecommerce.models.usuarios.Usuario;
 
 import jakarta.persistence.Entity;
@@ -13,14 +14,13 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
+
 @NoArgsConstructor
 
 @Entity
@@ -35,7 +35,7 @@ public class Producto {
     private Double precio;
     private Integer stock;
     private String estado;
-    private String imagenUrl;
+    //private String imagenUrl;
 
     @ManyToOne
     @JoinColumn(name = "id_categoria")
@@ -43,8 +43,10 @@ public class Producto {
 
     @ManyToOne
     @JoinColumn(name = "id_usuario")
+    @JsonIgnore
     private Usuario usuario;
 
     @OneToOne(mappedBy = "producto", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Rating rating;
 }
