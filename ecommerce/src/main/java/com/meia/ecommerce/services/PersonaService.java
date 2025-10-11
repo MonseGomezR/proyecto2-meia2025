@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.meia.ecommerce.models.usuarios.Persona;
+import com.meia.ecommerce.entities.usuarios.Persona;
 import com.meia.ecommerce.repository.PersonaRepo;
 
 @Service

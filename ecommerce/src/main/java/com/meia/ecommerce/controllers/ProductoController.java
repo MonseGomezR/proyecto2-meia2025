@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.meia.ecommerce.dto.ProductoDto;
-import com.meia.ecommerce.models.productos.Categoria;
-import com.meia.ecommerce.models.usuarios.Usuario;
+import com.meia.ecommerce.entities.productos.Categoria;
+import com.meia.ecommerce.entities.usuarios.Usuario;
 import com.meia.ecommerce.repository.CategoriaRepo;
 import com.meia.ecommerce.repository.UsuarioRepo;
 import com.meia.ecommerce.services.ProductoService;

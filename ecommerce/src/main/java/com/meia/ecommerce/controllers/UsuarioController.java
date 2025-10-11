@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.meia.ecommerce.dto.ProductoDto;
 import com.meia.ecommerce.dto.UsuarioDto;
 import com.meia.ecommerce.dto.UsuarioLoginDto;
-import com.meia.ecommerce.models.usuarios.Usuario;
+import com.meia.ecommerce.entities.usuarios.Usuario;
 import com.meia.ecommerce.services.ProductoService;
 import com.meia.ecommerce.services.UsuarioService;
 

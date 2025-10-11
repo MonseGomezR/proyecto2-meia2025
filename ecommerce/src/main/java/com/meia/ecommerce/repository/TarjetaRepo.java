@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.meia.ecommerce.models.usuarios.Tarjeta;
-import com.meia.ecommerce.models.usuarios.Usuario;
+import com.meia.ecommerce.entities.usuarios.Tarjeta;
+import com.meia.ecommerce.entities.usuarios.Usuario;
 
 @Repository
 public interface TarjetaRepo extends JpaRepository<Tarjeta, String>{

@@ -1,9 +1,9 @@
-package com.meia.ecommerce.models.ventas;
+package com.meia.ecommerce.entities.ventas;
 
 import java.sql.Date;
 import java.util.UUID;
 
-import com.meia.ecommerce.models.usuarios.Usuario;
+import com.meia.ecommerce.entities.usuarios.Usuario;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

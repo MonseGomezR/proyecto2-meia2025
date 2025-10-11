@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.meia.ecommerce.models.usuarios.Tarjeta;
-import com.meia.ecommerce.models.usuarios.Usuario;
+import com.meia.ecommerce.entities.usuarios.Tarjeta;
+import com.meia.ecommerce.entities.usuarios.Usuario;
 import com.meia.ecommerce.repository.UsuarioRepo;
 import com.meia.ecommerce.services.TarjetaService;
 

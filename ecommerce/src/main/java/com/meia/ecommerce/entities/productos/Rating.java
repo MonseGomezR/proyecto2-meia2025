@@ -1,4 +1,4 @@
-package com.meia.ecommerce.models.productos;
+package com.meia.ecommerce.entities.productos;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;

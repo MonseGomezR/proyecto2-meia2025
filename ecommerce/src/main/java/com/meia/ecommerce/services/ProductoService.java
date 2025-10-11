@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.meia.ecommerce.dto.ProductoDto;
-import com.meia.ecommerce.models.productos.Categoria;
-import com.meia.ecommerce.models.productos.Producto;
-import com.meia.ecommerce.models.usuarios.Usuario;
+import com.meia.ecommerce.entities.productos.Categoria;
+import com.meia.ecommerce.entities.productos.Producto;
+import com.meia.ecommerce.entities.usuarios.Usuario;
 import com.meia.ecommerce.repository.ProductoRepo;
 
 @Service

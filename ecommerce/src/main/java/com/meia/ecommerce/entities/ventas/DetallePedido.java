@@ -1,6 +1,6 @@
-package com.meia.ecommerce.models.ventas;
+package com.meia.ecommerce.entities.ventas;
 
-import com.meia.ecommerce.models.productos.Producto;
+import com.meia.ecommerce.entities.productos.Producto;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

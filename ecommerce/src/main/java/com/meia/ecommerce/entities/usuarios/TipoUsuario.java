@@ -1,4 +1,4 @@
-package com.meia.ecommerce.models.usuarios;
+package com.meia.ecommerce.entities.usuarios;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

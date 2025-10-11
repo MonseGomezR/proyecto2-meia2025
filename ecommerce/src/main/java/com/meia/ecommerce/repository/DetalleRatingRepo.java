@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.meia.ecommerce.models.productos.DetalleRating;
-import com.meia.ecommerce.models.productos.Rating;
-import com.meia.ecommerce.models.usuarios.Usuario;
+import com.meia.ecommerce.entities.productos.DetalleRating;
+import com.meia.ecommerce.entities.productos.Rating;
+import com.meia.ecommerce.entities.usuarios.Usuario;
 
 public interface DetalleRatingRepo extends JpaRepository<DetalleRating, Integer>{
     List<DetalleRating> findByRating(Rating rating);

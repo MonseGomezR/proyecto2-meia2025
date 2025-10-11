@@ -1,9 +1,9 @@
-package com.meia.ecommerce.models.productos;
+package com.meia.ecommerce.entities.productos;
 
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.meia.ecommerce.models.usuarios.Usuario;
+import com.meia.ecommerce.entities.usuarios.Usuario;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;

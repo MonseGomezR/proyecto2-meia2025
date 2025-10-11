@@ -12,9 +12,9 @@ import org.springframework.util.DigestUtils;
 import com.meia.ecommerce.dto.UsuarioDto;
 import com.meia.ecommerce.dto.UsuarioLoginDto;
 import com.meia.ecommerce.dto.UsuarioRegisterDto;
-import com.meia.ecommerce.models.usuarios.Persona;
-import com.meia.ecommerce.models.usuarios.TipoUsuario;
-import com.meia.ecommerce.models.usuarios.Usuario;
+import com.meia.ecommerce.entities.usuarios.Persona;
+import com.meia.ecommerce.entities.usuarios.TipoUsuario;
+import com.meia.ecommerce.entities.usuarios.Usuario;
 import com.meia.ecommerce.repository.UsuarioRepo;
 
 @Service

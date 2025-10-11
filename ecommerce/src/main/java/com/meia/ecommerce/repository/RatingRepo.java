@@ -3,8 +3,8 @@ package com.meia.ecommerce.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.meia.ecommerce.models.productos.Producto;
-import com.meia.ecommerce.models.productos.Rating;
+import com.meia.ecommerce.entities.productos.Producto;
+import com.meia.ecommerce.entities.productos.Rating;
 
 @Repository
 public interface RatingRepo extends JpaRepository<Rating, Integer> {

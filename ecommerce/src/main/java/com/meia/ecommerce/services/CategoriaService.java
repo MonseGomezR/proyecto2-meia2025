@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.meia.ecommerce.models.productos.Categoria;
+import com.meia.ecommerce.entities.productos.Categoria;
 import com.meia.ecommerce.repository.CategoriaRepo;
 
 @Service

@@ -1,16 +1,13 @@
-package com.meia.ecommerce.models.productos;
+package com.meia.ecommerce.entities.usuarios;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.meia.ecommerce.models.usuarios.Usuario;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,22 +18,19 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "detalle_rating", schema = "productos")
-public class DetalleRating {
+@Table(name = "tarjeta", schema = "usuarios")
+public class Tarjeta {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @GeneratedValue
+    private String numero;
 
-    private Double valor;
-    private String comentario;
+    private String nombre;
+    private String fechaVencimiento;
+    private String cvv;
 
     @ManyToOne
-    @JoinColumn(name = "id_rating", nullable = false)
     @JsonIgnore
-    private Rating rating;
-
-    @ManyToOne
     @JoinColumn(name = "id_usuario", nullable = false)
-    @JsonIgnore
     private Usuario usuario;
 }
