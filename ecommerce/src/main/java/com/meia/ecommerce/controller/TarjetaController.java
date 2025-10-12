@@ -1,4 +1,4 @@
-package com.meia.ecommerce.controllers;
+package com.meia.ecommerce.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.meia.ecommerce.entities.usuarios.Tarjeta;
-import com.meia.ecommerce.entities.usuarios.Usuario;
+import com.meia.ecommerce.model.usuarios.Tarjeta;
+import com.meia.ecommerce.model.usuarios.Usuario;
 import com.meia.ecommerce.repository.UsuarioRepo;
-import com.meia.ecommerce.services.TarjetaService;
+import com.meia.ecommerce.service.TarjetaService;
 
 @RestController
 @RequestMapping("/tarjeta")

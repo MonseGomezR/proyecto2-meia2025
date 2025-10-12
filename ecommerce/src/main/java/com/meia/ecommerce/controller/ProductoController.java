@@ -1,4 +1,4 @@
-package com.meia.ecommerce.controllers;
+package com.meia.ecommerce.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.meia.ecommerce.dto.ProductoDto;
-import com.meia.ecommerce.entities.productos.Categoria;
-import com.meia.ecommerce.entities.usuarios.Usuario;
+import com.meia.ecommerce.model.productos.Categoria;
+import com.meia.ecommerce.model.usuarios.Usuario;
 import com.meia.ecommerce.repository.CategoriaRepo;
 import com.meia.ecommerce.repository.UsuarioRepo;
-import com.meia.ecommerce.services.ProductoService;
+import com.meia.ecommerce.service.ProductoService;
 
 @RestController
 @RequestMapping("/producto")

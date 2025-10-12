@@ -1,4 +1,4 @@
-package com.meia.ecommerce.controllers;
+package com.meia.ecommerce.controller;
 
 import java.util.List;
 
@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.meia.ecommerce.entities.productos.Categoria;
-import com.meia.ecommerce.services.CategoriaService;
+import com.meia.ecommerce.model.productos.Categoria;
+import com.meia.ecommerce.service.CategoriaService;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 

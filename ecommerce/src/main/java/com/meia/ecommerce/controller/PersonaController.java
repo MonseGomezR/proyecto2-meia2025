@@ -1,4 +1,4 @@
-package com.meia.ecommerce.controllers;
+package com.meia.ecommerce.controller;
 
 import java.util.List;
 
@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.meia.ecommerce.common.ApiResponse;
 import com.meia.ecommerce.dto.UsuarioDto;
-import com.meia.ecommerce.entities.usuarios.Persona;
-import com.meia.ecommerce.entities.usuarios.TipoUsuario;
+import com.meia.ecommerce.model.usuarios.Persona;
+import com.meia.ecommerce.model.usuarios.TipoUsuario;
 import com.meia.ecommerce.repository.TipoUsuarioRepo;
-import com.meia.ecommerce.services.PersonaService;
-import com.meia.ecommerce.services.UsuarioService;
+import com.meia.ecommerce.service.PersonaService;
+import com.meia.ecommerce.service.UsuarioService;
 
 @RestController
 @RequestMapping("/persona")

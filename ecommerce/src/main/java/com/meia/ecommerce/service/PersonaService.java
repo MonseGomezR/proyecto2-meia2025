@@ -1,11 +1,11 @@
-package com.meia.ecommerce.services;
+package com.meia.ecommerce.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.meia.ecommerce.entities.usuarios.Persona;
+import com.meia.ecommerce.model.usuarios.Persona;
 import com.meia.ecommerce.repository.PersonaRepo;
 
 @Service

@@ -1,7 +1,7 @@
-package com.meia.ecommerce.entities.productos;
+package com.meia.ecommerce.model.productos;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.meia.ecommerce.entities.usuarios.Usuario;
+import com.meia.ecommerce.model.usuarios.Usuario;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

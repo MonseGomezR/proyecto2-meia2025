@@ -1,12 +1,12 @@
-package com.meia.ecommerce.services;
+package com.meia.ecommerce.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.meia.ecommerce.entities.usuarios.Tarjeta;
-import com.meia.ecommerce.entities.usuarios.Usuario;
+import com.meia.ecommerce.model.usuarios.Tarjeta;
+import com.meia.ecommerce.model.usuarios.Usuario;
 import com.meia.ecommerce.repository.TarjetaRepo;
 
 @Service

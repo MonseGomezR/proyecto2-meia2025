@@ -1,4 +1,4 @@
-package com.meia.ecommerce.services;
+package com.meia.ecommerce.service;
 
 public class DetalleRatingService {
 

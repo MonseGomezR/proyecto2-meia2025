@@ -1,4 +1,4 @@
-package com.meia.ecommerce.services;
+package com.meia.ecommerce.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +12,9 @@ import org.springframework.util.DigestUtils;
 import com.meia.ecommerce.dto.UsuarioDto;
 import com.meia.ecommerce.dto.UsuarioLoginDto;
 import com.meia.ecommerce.dto.UsuarioRegisterDto;
-import com.meia.ecommerce.entities.usuarios.Persona;
-import com.meia.ecommerce.entities.usuarios.TipoUsuario;
-import com.meia.ecommerce.entities.usuarios.Usuario;
+import com.meia.ecommerce.model.usuarios.Persona;
+import com.meia.ecommerce.model.usuarios.TipoUsuario;
+import com.meia.ecommerce.model.usuarios.Usuario;
 import com.meia.ecommerce.repository.UsuarioRepo;
 
 @Service

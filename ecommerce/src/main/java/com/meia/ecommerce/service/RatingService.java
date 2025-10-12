@@ -1,4 +1,4 @@
-package com.meia.ecommerce.services;
+package com.meia.ecommerce.service;
 
 
 import java.util.List;
@@ -7,10 +7,10 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.meia.ecommerce.entities.productos.DetalleRating;
-import com.meia.ecommerce.entities.productos.Producto;
-import com.meia.ecommerce.entities.productos.Rating;
-import com.meia.ecommerce.entities.usuarios.Usuario;
+import com.meia.ecommerce.model.productos.DetalleRating;
+import com.meia.ecommerce.model.productos.Producto;
+import com.meia.ecommerce.model.productos.Rating;
+import com.meia.ecommerce.model.usuarios.Usuario;
 import com.meia.ecommerce.repository.DetalleRatingRepo;
 import com.meia.ecommerce.repository.ProductoRepo;
 import com.meia.ecommerce.repository.RatingRepo;

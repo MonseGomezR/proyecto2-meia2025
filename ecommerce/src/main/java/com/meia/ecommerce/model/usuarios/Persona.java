@@ -1,4 +1,4 @@
-package com.meia.ecommerce.entities.usuarios;
+package com.meia.ecommerce.model.usuarios;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

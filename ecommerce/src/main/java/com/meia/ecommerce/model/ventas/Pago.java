@@ -1,6 +1,6 @@
-package com.meia.ecommerce.entities.ventas;
+package com.meia.ecommerce.model.ventas;
 
-import com.meia.ecommerce.entities.usuarios.Tarjeta;
+import com.meia.ecommerce.model.usuarios.Tarjeta;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -1,11 +1,11 @@
-package com.meia.ecommerce.services;
+package com.meia.ecommerce.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.meia.ecommerce.entities.productos.Categoria;
+import com.meia.ecommerce.model.productos.Categoria;
 import com.meia.ecommerce.repository.CategoriaRepo;
 
 @Service
