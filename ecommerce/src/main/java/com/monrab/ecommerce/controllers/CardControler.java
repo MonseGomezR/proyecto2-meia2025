@@ -16,7 +16,7 @@ import com.monrab.ecommerce.security.services.UserDetailsImpl;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+
 @RestController
 @RequestMapping("/api/cards")
 public class CardControler {

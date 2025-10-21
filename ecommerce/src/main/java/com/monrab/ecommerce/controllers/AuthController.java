@@ -17,7 +17,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,10 +31,8 @@ import com.monrab.ecommerce.repository.RoleRepository;
 import com.monrab.ecommerce.repository.UserRepository;
 import com.monrab.ecommerce.security.jwt.JwtUtils;
 import com.monrab.ecommerce.security.services.UserDetailsImpl;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -55,11 +52,6 @@ public class AuthController {
 
     @Autowired
     JwtUtils jwtUtils;
-
-    @GetMapping("/")
-    public String getMethodName(@RequestParam String param) {
-        return new String();
-    }
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {

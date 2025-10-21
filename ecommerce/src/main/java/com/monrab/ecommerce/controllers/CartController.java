@@ -19,7 +19,7 @@ import com.monrab.ecommerce.repository.ProductRepository;
 import com.monrab.ecommerce.repository.UserRepository;
 import com.monrab.ecommerce.security.services.UserDetailsImpl;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+
 @RestController
 @RequestMapping("/api/cart")
 public class CartController {
