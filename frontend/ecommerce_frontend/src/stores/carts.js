@@ -53,6 +53,13 @@ export const useCartStore = defineStore('cart', () => {
         await fetchCart()
     }
 
+    const updateQuantity = async (itemId, newQuantity) => {
+        const item = this.items.find(i => i.id === itemId)
+        if (item) {
+            item.quantity = newQuantity
+        }
+    }
+
     return {
         cart,
         itemCount,
@@ -62,5 +69,6 @@ export const useCartStore = defineStore('cart', () => {
         addManyToCart,
         removeFromCart,
         clearCart,
+        updateQuantity,
     }
 })

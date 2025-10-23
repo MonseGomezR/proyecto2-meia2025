@@ -1,7 +1,9 @@
 package com.monrab.ecommerce.controllers;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -31,7 +33,6 @@ import com.monrab.ecommerce.repository.RoleRepository;
 import com.monrab.ecommerce.repository.UserRepository;
 import com.monrab.ecommerce.security.jwt.JwtUtils;
 import com.monrab.ecommerce.security.services.UserDetailsImpl;
-
 
 @RestController
 @RequestMapping("/api/auth")
@@ -73,7 +74,10 @@ public class AuthController {
                             roles));
         } catch (org.springframework.security.authentication.DisabledException e) {
             logger.warn("Login blocked: user is disabled -> {}", loginRequest.getUsername());
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("The user is not active");
+            Map<String, String> body = new HashMap<>();
+            body.put("error", "USER_DISABLED");
+            body.put("message", "Tu cuenta está deshabilitada. Contacta al administrador.");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(body);
         } catch (Exception e) {
             logger.error("Authentication error: {}", e.getMessage());
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
@@ -95,7 +99,7 @@ public class AuthController {
                 signUpRequest.getLastName(), signUpRequest.getPhone(), signUpRequest.getAddress());
 
         Cart cart = new Cart();
-        
+
         User user = new User(signUpRequest.getUsername(), signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()), person, cart);
 
@@ -105,7 +109,7 @@ public class AuthController {
                 .orElseThrow(() -> {
                     return new RuntimeException("Error: Role is not found.");
                 });
-        
+
         roles.add(userRole);
 
         user.setRoles(roles);

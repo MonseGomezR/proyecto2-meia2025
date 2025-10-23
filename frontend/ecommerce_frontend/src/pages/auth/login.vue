@@ -4,8 +4,8 @@
       <h2 class="text-xl font-bold mb-4 text-center">Iniciar Sesión</h2>
       <input v-model="username" placeholder="Usuario" class="w-full p-2 mb-3 border rounded" />
       <input v-model="password" type="password" placeholder="Contraseña" class="w-full p-2 mb-3 border rounded" />
-      <button class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">Entrar</button>
-      <p v-if="error" class="text-red-600 mt-2 text-center">{{ error }}</p>
+      <button class="w-full bg-cyan-600 text-white py-2 rounded hover:bg-cyan-700">Entrar</button>
+      <p v-if="error" class="text-pink-600 mt-2 text-center">{{ error }}</p>
     </form>
   </div>
 </template>
@@ -27,8 +27,8 @@ const handleLogin = async () => {
     await auth.login(username.value, password.value)
     await nextTick()
     router.replace('/') 
-  } catch {
-    error.value = 'Usuario o contraseña incorrectos'
+  } catch (err) {
+    error.value = err.response?.data?.message || 'Usuario o contraseña incorrectos'
   }
 }
 </script>

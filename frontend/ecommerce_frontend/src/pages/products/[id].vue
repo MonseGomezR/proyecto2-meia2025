@@ -26,7 +26,7 @@
                     </p>
 
                     <!-- Contador para agregar al carrito -->
-                    <div class="flex items-center gap-3 mt-2">
+                    <div v-if="isUser" class="flex items-center gap-3 mt-2">
                         <button @click="decreaseCount"
                             class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300">-</button>
                         <span class="font-semibold">{{ count }}</span>
@@ -35,10 +35,22 @@
                     </div>
 
                     <!-- Botón agregar al carrito -->
-                    <button @click="addToCart" :disabled="count === 0 || product.stock === 0"
-                        class="mt-3 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-gray-400">
-                        Agregar al carrito
-                    </button>
+                    <div>
+                        <button v-if="isUser" @click="addToCart" :disabled="count === 0 || product.stock === 0"
+                            class="mt-3 px-4 py-2 bg-pink-600 text-white rounded hover:bg-pink-700 disabled:bg-gray-400">
+                            Agregar al carrito.
+                        </button>
+
+                        <button v-else-if="isMod"
+                            class="mt-3 px-4 py-2 bg-pink-600 text-white rounded hover:bg-pink-700 disabled:bg-gray-400">
+                            Administrar
+                        </button>
+
+                        <button v-else @click="goToLogin"
+                            class="mt-3 px-4 py-2 bg-cyan-600 text-white rounded hover:bg-cyan-700 disabled:bg-gray-400">
+                            Inicia sesion para comprar y vender.
+                        </button>
+                    </div>
 
                     <!-- Ratings (placeholder) -->
                     <div class="mt-4">
@@ -62,16 +74,25 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { useRoute } from "vue-router";
 import axios from "axios";
 import { useCartStore } from "@/stores/carts";
-
+import { useAuthStore } from "@/stores/auth";
 import CartFloating from "@components/CartFloating.vue";
+import router from "../../router";
+
 const route = useRoute();
+const auth = useAuthStore()
 const product = ref(null);
 const count = ref(0);
 const cartStore = useCartStore()
+
+
+const role = computed(() => auth.user?.roles?.[0] || '')
+const isAuthenticated = computed(() => auth.isAuthenticated)
+const isUser = computed(() => role.value === 'ROLE_USER')
+const isMod = computed(() => role.value === 'ROLE_MODERATOR' || role.value === 'ROLE_ADMIN')
 
 const props = defineProps({
     id: String
@@ -94,10 +115,13 @@ const decreaseCount = () => {
     if (count.value > 0) count.value--;
 };
 
-
 const addToCart = () => {
     if (count.value === 0) return;
-    cartStore.addManyToCart(props.id, count.value)
+    cartStore.addManyToCart(product.value, count.value)
     count.value = 0;
+}
+
+const goToLogin = () => {
+    router.replace('/auth/login')
 }
 </script>
