@@ -59,6 +59,7 @@ export const useCartStore = defineStore('cart', () => {
         loading,
         fetchCart,
         addToCart,
+        addManyToCart,
         removeFromCart,
         clearCart,
     }

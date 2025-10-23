@@ -119,7 +119,6 @@ const initials = computed(() => {
 
 function toggleMobile() {
     mobileOpen.value = !mobileOpen.value
-    // close dropdown when opening mobile menu
     if (mobileOpen.value) dropdownOpen.value = false
 }
 
@@ -133,7 +132,6 @@ function logout() {
     mobileOpen.value = false
 }
 
-// close dropdown when clicking outside
 function handleClickOutside(e) {
     if (!dropdownOpen.value) return
     const btnEl = btn.value

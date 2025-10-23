@@ -22,7 +22,6 @@ export default {
     name: 'TopbarAdmin',
     methods: {
         handleLogout() {
-            // Add logout logic here
             console.log('Logout clicked')
         }
     }

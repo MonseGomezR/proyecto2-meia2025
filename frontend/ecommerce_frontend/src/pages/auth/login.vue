@@ -26,7 +26,7 @@ const handleLogin = async () => {
   try {
     await auth.login(username.value, password.value)
     await nextTick()
-    router.replace('/') // redirige al home
+    router.replace('/') 
   } catch {
     error.value = 'Usuario o contraseña incorrectos'
   }

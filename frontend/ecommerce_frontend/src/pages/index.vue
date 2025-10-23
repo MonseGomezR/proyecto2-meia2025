@@ -16,12 +16,7 @@
     </div>
   </section>
 
-  <button v-if="isUser" @click="ui.toggleCart"
-    class="fixed bottom-6 right-6 bg-pink-600 text-white rounded-full p-4 shadow-lg hover:bg-pink-700 transition w-14 h-14">
-    <i class="pi pi-shopping-cart" style="color: white; font-size: 1.5rem;"></i>
-  </button>
-
-  <CartSidebar />
+  <CartFloating/>
 </template>
 
 <script setup>
@@ -30,7 +25,7 @@ import axios from 'axios'
 import { useUiStore } from '@/stores/ui'
 import { useCartStore } from '@/stores/carts'
 import ProductCard from '@components/ProductCard.vue'
-import CartSidebar from '@components/CartSidebar.vue'
+import CartFloating from '@components/CartFloating.vue'
 import { useAuthStore } from '@/stores/auth'
 import router from '../router'
 
@@ -42,7 +37,7 @@ const products = ref([])
 const loading = ref(true)
 
 const role = computed(() => auth.user?.roles?.[0] || '')
-const isUser = computed(() => role.value === 'ROLE_USER') // ✅ corregido
+const isUser = computed(() => role.value === 'ROLE_USER')
 
 const fetchProducts = async () => {
   try {

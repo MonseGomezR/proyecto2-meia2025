@@ -8,7 +8,7 @@ export const useAuthStore = defineStore('auth', {
   }),
   getters: {
     isAuthenticated: state => !!state.token,
-    userRole: (state) => state.user?.roles?.[0] || null, // ejemplo: "ROLE_USER"
+    userRole: (state) => state.user?.roles?.[0] || null,
   },
   actions: {
     async login(username, password) {

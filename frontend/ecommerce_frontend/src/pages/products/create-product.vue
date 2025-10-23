@@ -118,7 +118,6 @@ const createProduct = async () => {
         await axios.post("/products/create", productToSend);
         alert("Producto creado correctamente");
 
-        // Reset form
         Object.assign(product, {
             name: "",
             description: "",
