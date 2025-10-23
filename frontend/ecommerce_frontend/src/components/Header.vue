@@ -8,7 +8,7 @@
                 eCommerce GT
             </a>
 
-            <!-- Desktop Nav -->
+            <!-- Navigation Links -->
             <nav class="hidden md:flex space-x-6">
                 <a v-for="link in navLinks" :key="link.href" :href="link.href"
                     class="text-gray-700 hover:text-teal-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-teal-600 rounded">
@@ -19,16 +19,24 @@
             <!-- Desktop Auth Buttons -->
             <div class="hidden md:flex items-center space-x-4">
                 <template v-if="isAuthenticated">
-                    <span class="text-gray-700">Hola, {{ username }}</span>
+                    <span class="text-gray-700">
+                        Hola, {{ username }}
+                        <span v-if="role" class="text-gray-500 text-sm italic">
+                            ({{ role.replace('ROLE_', '') }})
+                        </span>
+                    </span>
                     <button @click="handleLogout"
-                        class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded shadow">
+                        class="bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded shadow">
                         Cerrar sesión
                     </button>
                 </template>
                 <template v-else>
-                    <a href="/auth/login" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded shadow">Login</a>
-                    <a href="/auth/register"
-                        class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded shadow">Register</a>
+                    <a href="/auth/login" class="bg-cyan-600 hover:bg-cyan-700 text-white px-4 py-2 rounded shadow">
+                        Login
+                    </a>
+                    <a href="/auth/register" class="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded shadow">
+                        Register
+                    </a>
                 </template>
             </div>
 
@@ -36,7 +44,6 @@
             <button @click="toggleMenu"
                 class="md:hidden p-2 focus:outline-none focus:ring-2 focus:ring-teal-600 rounded"
                 :aria-expanded="isMenuOpen.toString()" aria-controls="mobile-menu" aria-label="Toggle menu">
-                <!-- icon simple -->
                 <span v-if="!isMenuOpen">☰</span>
                 <span v-else>✕</span>
             </button>
@@ -56,11 +63,16 @@
 
                     <template v-if="isAuthenticated">
                         <li>
-                            <span class="block text-gray-700 py-2 px-2">Hola, {{ username }}</span>
+                            <span class="block text-gray-700 py-2 px-2">
+                                Hola, {{ username }}
+                                <span v-if="role" class="text-gray-500 text-sm italic">
+                                    ({{ role.replace('ROLE_', '') }})
+                                </span>
+                            </span>
                         </li>
                         <li>
                             <button @click="handleLogout"
-                                class="w-full bg-red-600 hover:bg-red-700 text-white py-2 px-2 rounded">
+                                class="w-full bg-pink-600 hover:bg-pink-700 text-white py-2 px-2 rounded">
                                 Cerrar sesión
                             </button>
                         </li>
@@ -69,14 +81,14 @@
                     <template v-else>
                         <li>
                             <a href="/auth/login"
-                                class="block bg-blue-600 hover:bg-blue-700 text-white text-center py-2 px-2 rounded"
+                                class="block bg-cyan-600 hover:bg-cyan-700 text-white text-center py-2 px-2 rounded"
                                 @click="toggleMenu">
                                 Login
                             </a>
                         </li>
                         <li>
                             <a href="/auth/register"
-                                class="block bg-green-600 hover:bg-green-700 text-white text-center py-2 px-2 rounded"
+                                class="block bg-teal-600 hover:bg-teal-700 text-white text-center py-2 px-2 rounded"
                                 @click="toggleMenu">
                                 Register
                             </a>
@@ -85,7 +97,6 @@
                 </ul>
             </nav>
         </div>
-
     </header>
 </template>
 
@@ -97,10 +108,46 @@ import { useRouter } from 'vue-router'
 const auth = useAuthStore()
 const router = useRouter()
 
-console.log(auth.token)
-
 const isAuthenticated = computed(() => auth.isAuthenticated)
 const username = computed(() => auth.user?.username || '')
+const role = computed(() => auth.user?.roles?.[0] || '')
+
+const navLinksCommon = [
+    { href: '#tecnologia', label: 'Tecnología' },
+    { href: '#hogar', label: 'Hogar' },
+    { href: '#academico', label: 'Académico' },
+    { href: '#personal', label: 'Personal' },
+    { href: '#decoracion', label: 'Decoración' },
+    { href: '#varios', label: 'Varios' },
+]
+
+const navLinksUser = [
+    { href: '#productosU', label: 'Mis Productos' },
+    { href: '#tecnologia', label: 'Tecnología' },
+    { href: '#hogar', label: 'Hogar' },
+    { href: '#academico', label: 'Académico' },
+    { href: '#personal', label: 'Personal' },
+    { href: '#decoracion', label: 'Decoración' },
+    { href: '#varios', label: 'Varios' },
+]
+
+const navLinksMod = [
+    { href: '#productosM', label: 'Revisar Productos' },
+    { href: '#usuariosM', label: 'Administrar Usuarios' },
+]
+
+const navLinksAdmin = [
+    { href: '#dashboard', label: 'Dashboard' },
+    { href: '#usuarios', label: 'Usuarios' },
+    { href: '#reportes', label: 'Reportes' },
+]
+
+const navLinks = computed(() => {
+    if (role.value === 'ROLE_ADMIN') return navLinksAdmin
+    if (role.value === 'ROLE_MODERATOR') return navLinksMod
+    if (role.value === 'ROLE_USER') return navLinksUser
+    return navLinksCommon
+})
 
 const isMenuOpen = ref(false)
 const toggleMenu = () => {
@@ -112,16 +159,6 @@ const handleLogout = () => {
     isMenuOpen.value = false
     router.replace('/auth/login')
 }
-
-const navLinks = ref([
-    { href: '#productos', label: 'Productos' },
-    { href: '#tecnologia', label: 'Tecnologia' },
-    { href: '#hogar', label: 'Hogar' },
-    { href: '#academico', label: 'Academico' },
-    { href: '#personal', label: 'Personal' },
-    { href: '#decoracion', label: 'Decoracion' },
-    { href: '#varios', label: 'Varios' },
-])
 </script>
 
 <style scoped>

@@ -1,5 +1,7 @@
 package com.monrab.ecommerce.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,12 +17,12 @@ public class CartItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cart_item_id_seq")
-    @SequenceGenerator(name = "cart_item_id_seq", sequenceName = "sales.cart_item_id_seq",
-            allocationSize = 1)
+    @SequenceGenerator(name = "cart_item_id_seq", sequenceName = "sales.cart_item_id_seq", allocationSize = 1)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cart_id")
+    @JsonBackReference
     private Cart cart;
 
     @ManyToOne(fetch = FetchType.EAGER)

@@ -3,26 +3,43 @@
         <h2 class="text-xl font-bold mb-4">Crear producto</h2>
 
         <form @submit.prevent="createProduct">
+            <!-- Nombre -->
             <div class="mb-3">
                 <label class="block font-semibold mb-1">Nombre</label>
                 <input v-model="product.name" class="border rounded w-full p-2" required />
             </div>
 
+            <!-- Descripción -->
             <div class="mb-3">
                 <label class="block font-semibold mb-1">Descripción</label>
                 <textarea v-model="product.description" class="border rounded w-full p-2" rows="3"></textarea>
             </div>
 
+            <!-- Precio -->
             <div class="mb-3">
                 <label class="block font-semibold mb-1">Precio</label>
-                <input v-model.number="product.price" type="number" class="border rounded w-full p-2" required />
+                <input v-model.number="product.price" type="number" class="border rounded w-full p-2" min="0"
+                    required />
             </div>
 
+            <!-- Stock -->
             <div class="mb-3">
                 <label class="block font-semibold mb-1">Stock</label>
-                <input v-model.number="product.stock" type="number" class="border rounded w-full p-2" required />
+                <input v-model.number="product.stock" type="number" class="border rounded w-full p-2" min="0"
+                    required />
             </div>
 
+            <!-- Estado: Nuevo o Usado -->
+            <div class="mb-3">
+                <label class="block font-semibold mb-1">Estado</label>
+                <select v-model="product.state" class="border rounded w-full p-2" required>
+                    <option value="" disabled>Selecciona...</option>
+                    <option value="NEW">Nuevo</option>
+                    <option value="USED">Usado</option>
+                </select>
+            </div>
+
+            <!-- Categorías -->
             <div class="mb-3">
                 <label class="block font-semibold mb-2">Categorías</label>
                 <div class="grid grid-cols-2 gap-2">
@@ -37,48 +54,44 @@
                 </p>
             </div>
 
+            <!-- Imagen (URL) -->
             <div class="mb-3">
-                <label class="block font-semibold mb-1">Imagen (URL o archivo)</label>
-                <input v-model="imageUrl" placeholder="Pega un enlace de imagen..."
+                <label class="block font-semibold mb-1">Imagen (URL)</label>
+                <input v-model="product.image_url" placeholder="Pega un enlace de imagen..."
                     class="border rounded w-full p-2 mb-2" />
-                <input type="file" @change="handleFileUpload" class="block w-full" />
             </div>
 
-            <div v-if="previewUrl" class="mt-3">
+            <!-- Vista previa -->
+            <div v-if="product.image_url" class="mt-3">
                 <p class="font-medium mb-1">Vista previa:</p>
-                <img :src="previewUrl" alt="Vista previa" class="rounded-lg shadow w-full object-cover max-h-64" />
+                <img :src="product.image_url" alt="Vista previa"
+                    class="rounded-lg shadow w-full object-cover max-h-64" />
             </div>
 
+            <!-- Botón de submit -->
             <button type="submit" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full"
                 :disabled="loading">
                 {{ loading ? "Guardando..." : "Guardar producto" }}
             </button>
         </form>
     </div>
-
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, watch } from "vue";
+import { reactive, ref, onMounted } from "vue";
 import axios from "axios";
-import { useAuthStore } from "@/stores/auth";
-
-const auth = useAuthStore();
-auth.initializeAuth();
 
 const product = reactive({
     name: "",
     description: "",
-    price: 0,
-    stock: 0,
-    categories: [],
     image_url: "",
+    price: 0,
+    stock: 1,
+    state: "", 
+    categories: [],
 });
 
 const categories = ref([]);
-const imageUrl = ref("");
-const file = ref(null);
-const previewUrl = ref("");
 const loading = ref(false);
 
 const fetchCategories = async () => {
@@ -93,60 +106,28 @@ const fetchCategories = async () => {
 
 onMounted(fetchCategories);
 
-watch(imageUrl, (newUrl) => {
-    previewUrl.value = newUrl || "";
-});
-
-const handleFileUpload = (event) => {
-    const selectedFile = event.target.files[0];
-    file.value = selectedFile;
-    if (selectedFile) previewUrl.value = URL.createObjectURL(selectedFile);
-};
-
-const uploadToCloudinary = async (file) => {
-    const formData = new FormData();
-    formData.append("file", file);
-
-    const response = await axios.post("/products/upload", formData);
-    return response.data.url;
-};
-
 const createProduct = async () => {
+    if (!product.name || !product.price || !product.stock || !product.image_url || !product.state) {
+        alert("Por favor completa todos los campos obligatorios.");
+        return;
+    }
+
     try {
         loading.value = true;
-
-        let finalImageUrl = imageUrl.value;
-        if (!finalImageUrl && file.value) {
-            finalImageUrl = await uploadToCloudinary(file.value);
-        }
-        if (!finalImageUrl) {
-            alert("Por favor, sube o pega una imagen.");
-            return;
-        }
-
-        const productToSend = {
-            name: product.name,
-            description: product.description,
-            image_url: finalImageUrl,
-            price: product.price,
-            stock: product.stock,
-            categories: product.categories,
-            state: "WAITING",
-        };
-
-        await axios.post("/products", productToSend);
+        const productToSend = { ...product, status: "WAITING" };
+        await axios.post("/products/create", productToSend);
         alert("Producto creado correctamente");
 
+        // Reset form
         Object.assign(product, {
             name: "",
             description: "",
             price: 0,
-            stock: 0,
+            stock: 1,
             categories: [],
+            image_url: "",
+            state: "",
         });
-        imageUrl.value = "";
-        file.value = null;
-        previewUrl.value = "";
     } catch (err) {
         console.error(err);
         alert(err.response?.data?.message || err.message);

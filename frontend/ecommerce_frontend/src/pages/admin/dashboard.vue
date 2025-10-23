@@ -6,7 +6,5 @@
 </template>
 
 <script setup>
-definePageMeta({
-  layout: 'AdminLayout'
-})
+
 </script>

@@ -3,7 +3,6 @@ package com.monrab.ecommerce.controllers;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -15,13 +14,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.cloudinary.Cloudinary;
-import com.cloudinary.utils.ObjectUtils;
 import com.monrab.ecommerce.models.Category;
+import com.monrab.ecommerce.models.EProductState;
+import com.monrab.ecommerce.models.EProductStatus;
 import com.monrab.ecommerce.models.Product;
 import com.monrab.ecommerce.models.User;
 import com.monrab.ecommerce.payload.request.ProductRequest;
@@ -34,7 +31,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping("/api/products")
-
 public class ProductController {
 
     @Autowired
@@ -45,9 +41,6 @@ public class ProductController {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private Cloudinary cloudinary;
 
     @GetMapping("")
     public ResponseEntity<?> getAllProducts() {
@@ -97,38 +90,14 @@ public class ProductController {
         product.setDescription(request.getDescription());
         product.setImage_url(request.getImage_url());
         product.setPrice(request.getPrice());
-        product.setStock(request.getStock());
-        product.setState(request.getState());
+        product.setState(EProductState.valueOf(request.getState()));
+        product.setStatus(EProductStatus.valueOf(request.getStatus()));
         product.setCategories(categories);
         product.setOwner(user);
         product.setCreated_at(LocalDateTime.now());
 
         productRepository.save(product);
         return ResponseEntity.ok("Product created successfully!");
-    }
-
-    @SuppressWarnings("rawtypes")
-    @PostMapping("/upload")
-    public ResponseEntity<?> uploadImage(@RequestParam("file") MultipartFile file) {
-        try {
-            if (file.isEmpty()) {
-                return ResponseEntity.badRequest().body(Map.of("error", "No file uploaded"));
-            }
-
-            // Subida segura usando el bean de Cloudinary
-            Map uploadResult = cloudinary.uploader().upload(
-                    file.getBytes(),
-                    ObjectUtils.asMap(
-                            "resource_type", "auto"
-                    ));
-
-            String url = uploadResult.get("secure_url").toString();
-            return ResponseEntity.ok(Map.of("url", url));
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(500).body(Map.of("error", "Upload failed", "details", e.getMessage()));
-        }
     }
 
     @PutMapping("/{id}")

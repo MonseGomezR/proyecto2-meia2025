@@ -11,38 +11,23 @@
     </div>
 
     <div v-else class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-      <ProductCard v-for="product in products" :key="product.id" :product="product" @add-to-cart="addToCart"
+      <ProductCard v-for="product in products" :key="product.id" :product="product"
+        @add-to-cart="addToCart"
         @view-details="viewDetails(product.id)" />
     </div>
   </section>
-
-  <button v-if="isUser" @click="ui.toggleCart"
-    class="fixed bottom-6 right-6 bg-pink-600 text-white rounded-full p-4 shadow-lg hover:bg-pink-700 transition w-14 h-14">
-    <i class="pi pi-shopping-cart" style="color: white; font-size: 1.5rem;"></i>
-  </button>
-
-  <CartSidebar />
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted } from 'vue'
 import axios from 'axios'
-import { useUiStore } from '@/stores/ui'
-import { useCartStore } from '@/stores/carts'
 import ProductCard from '@components/ProductCard.vue'
-import CartSidebar from '@components/CartSidebar.vue'
-import { useAuthStore } from '@/stores/auth'
+import { useCartStore } from '@/stores/carts'
 import router from '../router'
-
-const auth = useAuthStore()
-const ui = useUiStore()
-const cartStore = useCartStore()
 
 const products = ref([])
 const loading = ref(true)
-
-const role = computed(() => auth.user?.roles?.[0] || '')
-const isUser = computed(() => role.value === 'ROLE_USER') // ✅ corregido
+const cartStore = useCartStore()
 
 const fetchProducts = async () => {
   try {
@@ -60,10 +45,8 @@ const addToCart = (product) => {
 }
 
 const viewDetails = (id) => {
-  router.push(`/products/${id}`);
-};
+  router.push(`/products/${id}`)
+}
 
-onMounted(() => {
-  fetchProducts()
-})
+onMounted(fetchProducts)
 </script>

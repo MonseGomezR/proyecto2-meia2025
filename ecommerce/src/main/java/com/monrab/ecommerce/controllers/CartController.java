@@ -1,7 +1,5 @@
 package com.monrab.ecommerce.controllers;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,6 +17,7 @@ import com.monrab.ecommerce.repository.ProductRepository;
 import com.monrab.ecommerce.repository.UserRepository;
 import com.monrab.ecommerce.security.services.UserDetailsImpl;
 
+import jakarta.transaction.Transactional;
 
 @RestController
 @RequestMapping("/api/cart")
@@ -41,40 +40,52 @@ public class CartController {
 
     @PostMapping("/add")
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<?> addProduct(@RequestBody AddProductRequest addProductRequest, @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        User user = userRepository.findById(userDetails.getId()).orElse(null);
+    @Transactional
+    public ResponseEntity<?> addProduct(@RequestBody AddProductRequest addProductRequest,
+            @AuthenticationPrincipal UserDetailsImpl userDetails) {
+
+        User user = userRepository.findById(userDetails.getId())
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
         Cart cart = user.getCart();
 
-        Product product = productRepository.findById(addProductRequest.getId()).orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+        Product product = productRepository.findById(addProductRequest.getId())
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
 
-        Optional<CartItem> existingItem = cart.getItems().stream()
+        CartItem item = cart.getItems().stream()
                 .filter(i -> i.getProduct().getId().equals(product.getId()))
-                .findFirst();
-        if (existingItem.isPresent()) {
-            CartItem item = existingItem.get();
+                .findFirst()
+                .orElse(null);
+
+        if (item != null) {
             item.setQuantity(item.getQuantity() + addProductRequest.getQuantity());
             item.updateSubtotal();
         } else {
-            CartItem item = new CartItem();
+            item = new CartItem();
             item.setProduct(product);
             item.setQuantity(addProductRequest.getQuantity());
             item.updateSubtotal();
+
             cart.addItem(item);
         }
 
         cart.recalculateTotal();
         cartRepository.save(cart);
-        return ResponseEntity.ok("Producto agregado");
+
+        return ResponseEntity.ok("Producto agregado al carrito");
     }
 
     @DeleteMapping("/remove/{itemId}")
+    @PreAuthorize("hasRole('USER')")
+    @Transactional
     public ResponseEntity<?> removeItem(@PathVariable Integer itemId) {
         CartItem item = cartItemRepository.findById(itemId)
                 .orElseThrow(() -> new RuntimeException("Item no encontrado"));
+
         Cart cart = item.getCart();
-        cartItemRepository.delete(item);
-        cart.recalculateTotal();
+        cart.removeItem(item);
+
         cartRepository.save(cart);
+
         return ResponseEntity.ok("Producto eliminado del carrito");
     }
 
