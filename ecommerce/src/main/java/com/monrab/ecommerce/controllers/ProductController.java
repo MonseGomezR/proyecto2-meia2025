@@ -127,7 +127,7 @@ public class ProductController {
         productRepository.save(product);
 
         notificationService.createNotification("Producto Aprovado",
-                "Tu producto " + product.getName() + " ha sido aprovado.", product.getOwner().getId(), false);
+                "Tu producto " + product.getName() + " ha sido aprovado.", product.getOwner().getId(), true);
 
         User user = userRepository.findById(userDetails.getId()).orElse(null);
         Logs log = new Logs();
@@ -147,7 +147,7 @@ public class ProductController {
         product.setStatus(EProductStatus.REJECTED);
         productRepository.save(product);
         notificationService.createNotification("Producto Rechazado",
-                "Tu producto " + product.getName() + " ha sido rechazado.", product.getOwner().getId(), false);
+                "Tu producto " + product.getName() + " ha sido rechazado.", product.getOwner().getId(), true);
 
         User user = userRepository.findById(userDetails.getId()).orElse(null);
         Logs log = new Logs();

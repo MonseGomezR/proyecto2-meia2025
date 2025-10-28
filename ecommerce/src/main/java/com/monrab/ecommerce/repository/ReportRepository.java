@@ -6,7 +6,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.monrab.ecommerce.models.OrderItem;
-import com.monrab.ecommerce.models.Order;
 
 import java.time.LocalDateTime;
 import java.util.*;

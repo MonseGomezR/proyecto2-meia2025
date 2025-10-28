@@ -114,7 +114,7 @@ public class OrderController {
                 "El estado de la orden con guía: " + order.getGuia() + " ha sido actualizado a "
                         + order.getStatus().getName(),
                 order.getUser().getId(),
-                false);
+                true);
                 
         User user = userRepository.findById(userDetails.getId()).orElse(null);
         Logs log = new Logs();
@@ -128,7 +128,7 @@ public class OrderController {
                     "El envio de su producto " + item.getProduct().getName() + " de la orden " + order.getGuia()
                             + " completado. Ha generado una ganancia de Q" + item.getSubtotal(),
                     item.getProduct().getOwner().getId(),
-                    false);
+                    true);
         }
         return ResponseEntity.ok(order);
     }
@@ -156,7 +156,7 @@ public class OrderController {
                 "El producto " + item.getProduct().getName() + " de la orden " + item.getOrder().getGuia()
                         + " ha sido actualizado a " + item.getStatus().getName(),
                 userId,
-                false);
+                true);
 
         return ResponseEntity.ok("Estado del item de la orden actualizado correctamente");
     }
