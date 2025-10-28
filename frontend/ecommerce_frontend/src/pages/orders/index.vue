@@ -4,17 +4,14 @@
             Mis Ordenes
         </h2>
 
-        <!-- Cargando -->
         <div v-if="cargando" class="text-center text-gray-500">
             <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
         </div>
 
-        <!-- Sin ordenes -->
         <div v-else-if="ordenes.length === 0" class="text-center text-gray-500">
             Aun no tienes ordenes registradas.
         </div>
 
-        <!-- Lista de ordenes -->
         <div v-else class="space-y-4">
             <div v-for="orden in ordenes" :key="orden.id"
                 class="bg-white shadow rounded-lg p-4 border border-gray-200 hover:shadow-md transition-all duration-200">

@@ -16,7 +16,6 @@
             </div>
         </div>
 
-        <!-- SECCION: BOTTOM -->
         <div class="flex items-center gap-3">
             <p class="font-semibold">
                 Q{{ (item.product.price * item.quantity).toFixed(2) }}

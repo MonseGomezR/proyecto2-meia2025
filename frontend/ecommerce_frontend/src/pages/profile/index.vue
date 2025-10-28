@@ -1,6 +1,5 @@
 <template>
     <section class="max-w-4xl mx-auto p-6">
-        <!-- Encabezado -->
         <h2 class="text-3xl font-bold mb-6 text-gray-800 text-center">Mi Perfil</h2>
 
         <div v-if="userInfo" class="bg-white shadow rounded-2xl p-6 mb-8">

@@ -3,7 +3,6 @@
         <div class="max-w-6xl mx-auto p-6">
             <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Ordenes</h2>
 
-            <!-- Tabs -->
             <div class="flex justify-center mb-6 border-b border-gray-200">
                 <button @click="activeTab = 'ready'" :class="[
                     'px-6 py-2 font-medium transition-all duration-200',
@@ -31,7 +30,6 @@
                 </button>
             </div>
 
-            <!-- Contenido de Tabs -->
             <div v-if="activeTab === 'ready'">
                 <div v-if="loadingReady" class="text-center text-gray-600 py-8">
                     <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>

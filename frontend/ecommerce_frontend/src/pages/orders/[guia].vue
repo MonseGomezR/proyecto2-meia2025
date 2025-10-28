@@ -22,7 +22,6 @@
         </div>
 
         <div v-else class="space-y-6">
-            <!-- Informacion general -->
             <div class="bg-white shadow rounded-lg p-4 border border-gray-200">
                 <p><span class="font-semibold">Numero de guia:</span> {{ orden.guia }}</p>
                 <p><span class="font-semibold">Fecha de creacion:</span> {{ new Date(orden.created_at).toLocaleString()
@@ -36,7 +35,6 @@
                 </p>
             </div>
 
-            <!-- Linea de progreso -->
             <div class="relative">
                 <div class="absolute top-1/2 transform -translate-y-1/2 w-full h-1 bg-gray-300"></div>
                 <div class="absolute top-1/2 transform -translate-y-1/2 h-1 bg-cyan-600 transition-all duration-700"
@@ -59,7 +57,6 @@
                 </div>
             </div>
 
-            <!-- Mini progreso de cada OrderItem -->
             <div class="space-y-4 mt-6">
                 <h3 class="text-xl font-semibold">Productos</h3>
                 <div v-for="item in orden.orderItems" :key="item.id"
@@ -71,7 +68,6 @@
                         </span>
                     </div>
 
-                    <!-- Barra de progreso mini -->
                     <div class="relative h-2 bg-gray-300 rounded-full">
                         <div class="absolute h-2 rounded-full bg-cyan-600 transition-all duration-500"
                             :style="{ width: miniProgress(item) + '%' }"></div>

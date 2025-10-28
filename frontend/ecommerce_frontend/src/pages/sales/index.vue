@@ -2,7 +2,6 @@
     <section class="p-6 max-w-5xl mx-auto">
         <h2 class="text-2xl font-bold mb-4 text-center">Productos</h2>
 
-        <!-- TABS -->
         <div class="flex justify-center mb-6 border-b border-gray-200">
             <button @click="activeTab = 'create'" :class="[
                 'px-6 py-2 font-medium transition-all duration-200',
@@ -22,7 +21,6 @@
             </button>
         </div>
 
-        <!-- SECCION: NUEVO PRODUCTO -->
         <div v-if="activeTab === 'create'" class="bg-white shadow-md rounded-xl p-6 border border-gray-200">
             <h3 class="text-xl font-semibold text-teal-700 mb-4">Agregar nuevo producto</h3>
             <form @submit.prevent="createProduct" class="space-y-4">
@@ -85,7 +83,6 @@
             </form>
         </div>
 
-        <!-- SECCION: PRODUCTOS VENDIDOS -->
         <div v-else-if="activeTab === 'sales'" class="bg-white shadow-md rounded-xl p-6 border border-gray-200">
             <h3 class="text-xl font-semibold text-cyan-700 mb-4">Productos vendidos</h3>
             <div v-if="loadingSales" class="text-center text-gray-500">

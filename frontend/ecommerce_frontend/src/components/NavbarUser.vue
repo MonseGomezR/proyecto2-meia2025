@@ -2,11 +2,9 @@
     <header class="bg-white shadow">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="relative flex justify-between items-center h-16">
-                <!-- Brand -->
                 <div class="flex items-center">
                     <router-link to="/" class="text-xl font-semibold text-gray-800">MyShop</router-link>
 
-                    <!-- Desktop nav -->
                     <nav class="hidden sm:flex sm:ml-8 sm:space-x-4">
                         <router-link to="/" class="px-3 py-2 text-sm text-gray-700 hover:text-gray-900">Home</router-link>
                         <router-link to="/shop" class="px-3 py-2 text-sm text-gray-700 hover:text-gray-900">Shop</router-link>
@@ -15,9 +13,7 @@
                     </nav>
                 </div>
 
-                <!-- Right side: user + mobile toggle -->
                 <div class="flex items-center">
-                    <!-- Desktop user area -->
                     <div class="hidden sm:flex sm:items-center sm:space-x-3">
                         <div class="flex items-center space-x-3">
                             <div class="w-8 h-8 rounded-full bg-indigo-500 text-white flex items-center justify-center text-sm font-medium">
@@ -34,7 +30,6 @@
                             </button>
                         </div>
 
-                        <!-- Dropdown -->
                         <div
                             v-if="dropdownOpen"
                             ref="dropdown"
@@ -48,7 +43,6 @@
                         </div>
                     </div>
 
-                    <!-- Mobile menu button -->
                     <button
                         @click="toggleMobile"
                         class="sm:hidden ml-3 px-3 py-2 rounded bg-gray-100 text-sm text-gray-700 hover:bg-gray-200 focus:outline-none"
@@ -61,7 +55,6 @@
             </div>
         </div>
 
-        <!-- Mobile menu -->
         <div v-if="mobileOpen" id="mobile-menu" class="sm:hidden border-t border-gray-200">
             <div class="px-4 pt-4 pb-3 space-y-1">
                 <router-link to="/" class="block px-3 py-2 text-base text-gray-700 hover:bg-gray-50 rounded">Home</router-link>
