@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-center items-center min-h-screen bg-gray-100">
     <form @submit.prevent="handleLogin" class="bg-white p-6 rounded shadow w-full max-w-sm">
-      <h2 class="text-xl font-bold mb-4 text-center">Iniciar Sesión</h2>
+      <h2 class="text-xl font-bold mb-4 text-center">Iniciar Sesion</h2>
       <input v-model="username" placeholder="Usuario" class="w-full p-2 mb-3 border rounded" />
       <input v-model="password" type="password" placeholder="Contraseña" class="w-full p-2 mb-3 border rounded" />
       <button class="w-full bg-cyan-600 text-white py-2 rounded hover:bg-cyan-700">Entrar</button>
@@ -26,7 +26,13 @@ const handleLogin = async () => {
   try {
     await auth.login(username.value, password.value)
     await nextTick()
-    router.replace('/') 
+    if(auth.user.roles.includes('ROLE_ADMIN')) {
+      router.push('/admin/dashboard')
+    } else if(auth.user.roles.includes('ROLE_LOGISTIC')) {
+      router.push('/envios')
+    } else {
+      router.push('/')
+    }
   } catch (err) {
     error.value = err.response?.data?.message || 'Usuario o contraseña incorrectos'
   }

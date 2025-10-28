@@ -3,6 +3,8 @@ package com.monrab.ecommerce.payload.response;
 import java.util.List;
 import java.util.UUID;
 
+import com.monrab.ecommerce.models.Person;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,12 +17,14 @@ public class JwtResponse {
     private String username;
     private String email;
     private List<String> roles;
+    private Person person;
 
-    public JwtResponse(String accessToken, UUID id, String username, String email, List<String> roles) {
+    public JwtResponse(String accessToken, UUID id, String username, String email, List<String> roles, Person person) {
         this.token = accessToken;
         this.id = id;
         this.username = username;
         this.email = email;
         this.roles = roles;
+        this.person = person;
     }
 }

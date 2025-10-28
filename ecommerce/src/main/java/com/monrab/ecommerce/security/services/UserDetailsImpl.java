@@ -11,8 +11,14 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.monrab.ecommerce.models.Person;
 import com.monrab.ecommerce.models.User;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
 
@@ -20,6 +26,7 @@ public class UserDetailsImpl implements UserDetails {
     private String username;
     private String email;
     private boolean active;
+    private Person person;
 
     @JsonIgnore
     private String password;
@@ -27,13 +34,14 @@ public class UserDetailsImpl implements UserDetails {
     private Collection<? extends GrantedAuthority> authorities;
 
     public UserDetailsImpl(UUID id, String username, String email, String password,
-            Collection<? extends GrantedAuthority> authorities, boolean active) {
+            Collection<? extends GrantedAuthority> authorities, boolean active, Person person) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
         this.authorities = authorities;
         this.active = active;
+        this.person = person;
     }
 
     public static UserDetailsImpl build(User user) {
@@ -46,7 +54,8 @@ public class UserDetailsImpl implements UserDetails {
                 user.getEmail(),
                 user.getPassword(),
                 authorities,
-                user.isActive());
+                user.isActive(),
+                user.getPerson());
     }
 
     @Override

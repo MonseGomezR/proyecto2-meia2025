@@ -2,8 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 import routes from 'virtual:generated-pages'
 import { useAuthStore } from '@/stores/auth'
 import { roleRestrictions } from './roleRestrictions'
-import UserLayout from '../layouts/UserLayout.vue'
-import AdminLayout from '../layouts/AdminLayout.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -16,34 +14,38 @@ const router = createRouter({
   ]
 })
 
-routes.forEach(route => {
-  if (route.path.startsWith('/admin')) {
-    route.component = AdminLayout
-  } else {
-    route.component = UserLayout
-  }
-})
-
 router.beforeEach((to, from, next) => {
   const auth = useAuthStore()
   auth.initializeAuth()
 
-  const requiredRoles = roleRestrictions[to.path]
+  // Buscar la primera ruta registrada (padre o hija) que tenga restricciones
+  const matchedRoute = to.matched.find(r => roleRestrictions[r.path])
+  const requiredRoles = matchedRoute ? roleRestrictions[matchedRoute.path] : undefined
 
   if (requiredRoles) {
     if (!auth.isAuthenticated) {
-      alert('Inicia sesión para acceder a esta página')
+      alert('Inicia sesion para acceder a esta pagina')
       return next('/')
     }
 
-    if (!requiredRoles.some(role => auth.user?.roles.includes(role))) {
-      alert('No tienes permisos para acceder a esta página')
-      return next('/')
+    const hasRole = requiredRoles.some(role => auth.user?.roles.includes(role))
+    if (!hasRole) {
+      alert('No tienes permisos para acceder a esta pagina')
+      if(auth.user?.roles.includes('ROLE_ADMIN')) {
+        return next('/admin/dashboard')
+      } else if(auth.user?.roles.includes('ROLE_LOGISTIC')) {
+        return next('/envios')
+      } else if(auth.user?.roles.includes('ROLE_MODERATOR')) {
+        return next('/moderation')
+      } else {
+        return next('/')
+      }
     }
   }
 
   next()
 })
+
 
 
 export default router

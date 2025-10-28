@@ -1,4 +1,3 @@
-<!-- components/CartFloating.vue -->
 <template>
     <button v-if="isUser" @click="ui.toggleCart"
       class="fixed bottom-6 right-6 bg-pink-600 text-white rounded-full p-4 shadow-lg hover:bg-pink-700 transition w-14 h-14">

@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,12 +21,12 @@ import com.monrab.ecommerce.models.User;
 import com.monrab.ecommerce.payload.request.SignupRequest;
 import com.monrab.ecommerce.payload.request.UserUpdateRequest;
 import com.monrab.ecommerce.payload.response.MessageResponse;
+import com.monrab.ecommerce.payload.response.UserProfileResponse;
+import com.monrab.ecommerce.repository.OrderItemRepository;
 import com.monrab.ecommerce.repository.RoleRepository;
 import com.monrab.ecommerce.repository.UserRepository;
 import com.monrab.ecommerce.security.services.UserDetailsImpl;
 import com.monrab.ecommerce.security.services.UserService;
-
-
 
 @RestController
 @RequestMapping("/api/users")
@@ -41,8 +39,8 @@ public class UserController {
     RoleRepository roleRepository;
     @Autowired
     PasswordEncoder encoder;
-
-    static final Logger logger = LoggerFactory.getLogger(UserController.class);
+    @Autowired
+    OrderItemRepository orderService;
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
@@ -64,49 +62,64 @@ public class UserController {
     @GetMapping("/me")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<?> getMe(@AuthenticationPrincipal UserDetailsImpl userDetails) {
-        return ResponseEntity.ok(userDetails);
+        //Double ganancias = orderService.calcularGananciaPorUsuario(userDetails.getId());
+        UserProfileResponse profile = userRepository.findById(userDetails.getId()).map(user -> {
+            Person person = user.getPerson();
+            return new UserProfileResponse(
+                    user.getId(),
+                    user.getUsername(),
+                    user.getEmail(),
+                    person.getDpi(),
+                    person.getFirst_name(),
+                    person.getLast_name(),
+                    person.getAddress(),
+                    person.getPhone(),
+                    user.getGanancias()
+            );
+        }).orElse(null);
+        if (profile == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        }
+        return ResponseEntity.ok(profile);
     }
 
     @PostMapping("/create")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> createUser(@RequestBody SignupRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-            logger.warn("Username already exists: {}", signUpRequest.getUsername());
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
         }
 
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-            logger.warn("Email already in use: {}", signUpRequest.getEmail());
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
         }
 
-        Person person = new Person(signUpRequest.getDpi(), signUpRequest.getFirstName(),
-                signUpRequest.getLastName(), signUpRequest.getPhone(), signUpRequest.getAddress());
+        Person person = new Person();
+        person.setDpi(signUpRequest.getDpi());
+        person.setFirst_name(signUpRequest.getFirstName());
+        person.setLast_name(signUpRequest.getLastName());
+        person.setPhone(signUpRequest.getPhone());
+        person.setAddress(signUpRequest.getAddress());
 
         User user = new User(signUpRequest.getUsername(), signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()), person, null);
 
-        logger.info("Password encoded successfully");
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
 
         if (strRoles == null) {
-            logger.info("No roles provided, using default ROLE_USER");
             Role userRole = roleRepository.findByName(ERole.ROLE_USER)
                     .orElseThrow(() -> {
-                        logger.error("ROLE_USER not found in DB!");
                         return new RuntimeException("Error: Role is not found.");
                     });
             roles.add(userRole);
         } else {
             strRoles.forEach(role -> {
-                logger.info("Processing role: {}", role);
                 switch (role) {
                     case "admin":
                         Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
                                 .orElseThrow(() -> {
-                                    logger.error("ROLE_ADMIN not found in DB!");
                                     return new RuntimeException("Error: Role is not found.");
                                 });
                         roles.add(adminRole);
@@ -114,7 +127,6 @@ public class UserController {
                     case "mod":
                         Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
                                 .orElseThrow(() -> {
-                                    logger.error("ROLE_MODERATOR not found in DB!");
                                     return new RuntimeException("Error: Role is not found.");
                                 });
                         roles.add(modRole);
@@ -123,7 +135,6 @@ public class UserController {
                     case "logic":
                         Role logicRole = roleRepository.findByName(ERole.ROLE_LOGISTIC)
                                 .orElseThrow(() -> {
-                                    logger.error("ROLE_LOGISTIC not found in DB!");
                                     return new RuntimeException("Error: Role is not found.");
                                 });
                         roles.add(logicRole);
@@ -131,7 +142,6 @@ public class UserController {
                     default:
                         Role userRole = roleRepository.findByName(ERole.ROLE_USER)
                                 .orElseThrow(() -> {
-                                    logger.error("ROLE_USER not found in DB!");
                                     return new RuntimeException("Error: Role is not found.");
                                 });
                         roles.add(userRole);
@@ -139,11 +149,9 @@ public class UserController {
             });
         }
 
-        logger.info("Roles assigned: {}", roles.stream().map(Role::getName).toList());
 
         user.setRoles(roles);
         userRepository.save(user);
-        logger.info("User saved successfully: {}", user.getUsername());
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
@@ -165,6 +173,11 @@ public class UserController {
         user.setActive(!user.isActive());
         userRepository.save(user);
         return ResponseEntity.ok("Estado de usuario cambiado a: " + (user.isActive() ? "Activo" : "Inactivo"));
+    }
+
+    public Double calcularGanancia(UUID userId) {
+        Double ganancia = orderService.calcularGananciaPorUsuario(userId);
+        return ganancia != null ? ganancia : 0.0;
     }
 
 }

@@ -1,22 +1,27 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
+import { useNotificationStore } from './notifications'
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     token: localStorage.getItem('token') || null,
     user: JSON.parse(localStorage.getItem('user')) || null,
   }),
+
   getters: {
     isAuthenticated: state => !!state.token,
-    userRole: (state) => state.user?.roles?.[0] || null,
+    userRole: state => state.user?.roles?.[0] || null,
+    person: state => state.user?.person || null,
   },
+
   actions: {
     async login(username, password) {
       const res = await axios.post('/auth/login', { username, password })
-      const { token, username: userName, email, roles } = res.data
+
+      const { token, username: userName, email, roles, person } = res.data
 
       this.$patch({
-        user: { username: userName, email, roles },
+        user: { username: userName, email, roles, person },
         token: token
       })
 
@@ -36,7 +41,10 @@ export const useAuthStore = defineStore('auth', {
       localStorage.removeItem('token')
       localStorage.removeItem('user')
       delete axios.defaults.headers.common['Authorization']
+      const notificationStore = useNotificationStore()
+      notificationStore.notifications = []
     },
+
     initializeAuth() {
       const token = localStorage.getItem('token')
       if (token) {

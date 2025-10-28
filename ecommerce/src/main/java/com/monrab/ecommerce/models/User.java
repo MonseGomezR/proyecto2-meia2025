@@ -12,8 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
+@Getter @Setter
 @NoArgsConstructor
 
 @Entity
@@ -38,6 +37,7 @@ public class User {
     private String password;
 
     private boolean active = true;
+    private Double ganancias = 0.0;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles", schema = "users", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -58,5 +58,5 @@ public class User {
         this.person = person;
         this.cart = cart;
     }
-
+    
 }

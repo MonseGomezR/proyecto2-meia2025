@@ -42,6 +42,7 @@ const isUser = computed(() => role.value === 'ROLE_USER')
 const fetchProducts = async () => {
   try {
     const res = await axios.get('/products')
+    console.log(res.data)
     products.value = res.data
   } catch (error) {
     console.error('Error cargando productos:', error)

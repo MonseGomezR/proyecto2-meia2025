@@ -25,7 +25,7 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: 'http://localhost:8080',
+        target: 'https://unbaffled-foliolate-allegra.ngrok-free.dev',
         changeOrigin: true,
         secure: false,
       },

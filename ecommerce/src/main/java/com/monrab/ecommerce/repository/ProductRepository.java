@@ -5,8 +5,10 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.monrab.ecommerce.models.EProductStatus;
 import com.monrab.ecommerce.models.Product;
 
 public interface ProductRepository extends JpaRepository<Product, UUID>{
     List<Product> findByOwnerId(UUID owner);
+    List<Product> findByStatus(EProductStatus state);
 }
