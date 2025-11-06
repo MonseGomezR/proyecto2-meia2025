@@ -49,6 +49,7 @@ public class OrderService {
 
         Cart cart = user.getCart();
         Set<CartItem> cartItems = cart.getItems();
+        System.out.println(cart.getItems());
 
         if (cartItems.isEmpty()) {
             throw new RuntimeException("El carrito está vacío");
@@ -88,7 +89,8 @@ public class OrderService {
         Order savedOrder = orderRepository.save(orden);
 
         savedOrder.setGuia(generarGuia(savedOrder.getId()));
-        return orderRepository.save(savedOrder);
+        orderRepository.save(savedOrder);
+        return savedOrder;
     }
 
     private String generarGuia(UUID id) {

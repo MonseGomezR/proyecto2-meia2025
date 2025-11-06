@@ -106,7 +106,7 @@
                                     ? 'bg-pink-100 text-pink-700'
                                     : 'bg-gray-100 text-gray-700'
                             ]">
-                                {{ product.status === 'APPROVED' ? 'Aprobado' : 'Rechazado' }}
+                                {{ product.status  }}
                             </span>
                         </div>
                     </div>
@@ -192,8 +192,10 @@ const fetchUsers = async () => {
 }
 
 const approveProduct = async (id) => {
+    console.log(id)
     try {
         await axios.put(`/products/${id}/approve`)
+        
         pendingProducts.value = pendingProducts.value.filter(p => p.id !== id)
         fetchProcessedProducts()
         alert('Producto aprobado correctamente')

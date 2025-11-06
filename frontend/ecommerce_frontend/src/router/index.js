@@ -18,7 +18,6 @@ router.beforeEach((to, from, next) => {
   const auth = useAuthStore()
   auth.initializeAuth()
 
-  // Buscar la primera ruta registrada (padre o hija) que tenga restricciones
   const matchedRoute = to.matched.find(r => roleRestrictions[r.path])
   const requiredRoles = matchedRoute ? roleRestrictions[matchedRoute.path] : undefined
 

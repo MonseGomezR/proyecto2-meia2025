@@ -29,6 +29,9 @@ import com.monrab.ecommerce.repository.ProductRepository;
 import com.monrab.ecommerce.repository.UserRepository;
 import com.monrab.ecommerce.security.services.NotificationService;
 import com.monrab.ecommerce.security.services.UserDetailsImpl;
+
+import jakarta.transaction.Transactional;
+
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -118,17 +121,24 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
+    @Transactional
     @PutMapping("/{id}/approve")
     @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
     public ResponseEntity<?> approvedProduct(@PathVariable UUID id,
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        System.out.println("ENTROO");
         Product product = productRepository.findById(id).orElse(null);
+        
+        System.out.println(product.getName());
         product.setStatus(EProductStatus.APPROVED);
+        System.out.println("AQUIIII");
         productRepository.save(product);
 
         notificationService.createNotification("Producto Aprovado",
                 "Tu producto " + product.getName() + " ha sido aprovado.", product.getOwner().getId(), true);
-
+            
+                
+        System.out.println("LAQUITOOO");
         User user = userRepository.findById(userDetails.getId()).orElse(null);
         Logs log = new Logs();
         log.setAction("PRODUCT APPROVED");
